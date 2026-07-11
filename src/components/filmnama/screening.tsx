@@ -1,0 +1,99 @@
+import { WORKS, BRAND } from "./data";
+import { Reveal } from "./reveal";
+
+// ============================================================
+// ۷. اتاق نمایش / آثار هنرجویان — گالری تاریک با حال‌وهوای سالن سینما
+//    تامبنیل ویدیویی با آیکون پلی به‌شکل حلقهٔ پروژکتور
+// ============================================================
+
+function ProjectorPlay() {
+  return (
+    <div className="group/play relative grid h-16 w-16 place-items-center rounded-full border-2 border-gold/70 transition-all duration-300 group-hover:scale-110 group-hover:border-gold sm:h-20 sm:w-20">
+      {/* inner lens ring */}
+      <span className="absolute inset-2 rounded-full border border-gold/40" />
+      <span className="absolute inset-4 rounded-full border border-gold/20" />
+      <svg viewBox="0 0 24 24" className="h-5 w-5 text-gold sm:h-6 sm:w-6" fill="currentColor" aria-hidden="true">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </div>
+  );
+}
+
+export function Screening() {
+  return (
+    <section
+      id="screening"
+      className="relative overflow-hidden border-b border-divider bg-noir py-20 sm:py-28"
+    >
+      {/* Cinema-seats backdrop */}
+      <img
+        src="/images/screening-seats.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover opacity-15"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-noir via-noir/85 to-noir" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <Reveal className="mb-12 max-w-2xl">
+          <span className="font-latin text-xs tracking-[0.35em] text-gold">SCREENING ROOM · اتاق نمایش</span>
+          <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
+            آثارِ هنرجویان روی پرده
+          </h2>
+          <p className="mt-5 leading-relaxed text-khaki">
+            فیلم‌های کوتاهی که در کارگاه فیلم‌نما ساخته شده‌اند؛ از ایده تا کات نهایی،
+            دستِ هنرجویان ما بوده است.
+          </p>
+        </Reveal>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {WORKS.map((w, i) => (
+            <Reveal key={w.title} delay={i * 0.08}>
+              <a
+                href={BRAND.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`مشاهدهٔ فیلم ${w.title} در اینستاگرام فیلم‌نما`}
+                className="group block overflow-hidden rounded-sm border border-divider bg-noir-2/80 backdrop-blur-sm transition-colors hover:border-gold/60"
+              >
+                {/* Thumbnail */}
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src="/images/screening-seats.png"
+                    alt={`پوستهٔ فیلم کوتاه ${w.title}`}
+                    className="h-full w-full object-cover opacity-50 transition-opacity duration-500 group-hover:opacity-70"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-noir-2 via-noir/40 to-noir/20" />
+
+                  {/* slate label */}
+                  <span className="absolute start-3 top-3 bg-noir/80 px-2 py-1 font-latin text-[10px] tracking-widest text-gold">
+                    {w.kind === "فیلم کوتاه" ? "SHORT FILM" : "FILM"}
+                  </span>
+
+                  {/* projector-ring play */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <ProjectorPlay />
+                  </div>
+                </div>
+
+                {/* Meta */}
+                <div className="p-5">
+                  <div className="font-latin text-[11px] tracking-[0.2em] text-khaki">
+                    {w.kind}
+                  </div>
+                  <h3 className="mt-1 font-display text-2xl font-extrabold text-ivory">
+                    «{w.title}»
+                  </h3>
+                  <div className="mt-2 text-sm text-khaki">{w.director}</div>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
