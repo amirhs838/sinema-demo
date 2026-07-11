@@ -26,8 +26,9 @@ export function Teachers() {
           {TEACHERS.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08}>
               <article className="group h-full overflow-hidden rounded-sm border border-divider bg-noir transition-colors hover:border-gold/60">
-                {/* Cinematic portrait — real photo with warm duotone treatment */}
-                <div className="spotlight relative flex aspect-[3/4] items-end justify-center overflow-hidden border-b border-divider sm:aspect-[4/5]">
+                {/* Cinematic portrait — real photo with warm duotone treatment.
+                    Image is a background layer (absolute); name plate overlays at bottom. */}
+                <div className="spotlight relative aspect-[3/4] overflow-hidden border-b border-divider sm:aspect-[4/5]">
                   {/* corner slate labels */}
                   <span className="absolute start-3 top-3 z-20 bg-noir/75 px-2 py-0.5 font-latin text-[10px] tracking-widest text-gold">
                     CAST
@@ -36,14 +37,14 @@ export function Teachers() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  {/* Photo — warm sepia/gold tint + contrast for noir cohesion */}
+                  {/* Photo — absolute background layer, warm sepia/gold tint + contrast */}
                   <img
                     src={t.image}
                     alt={`${t.name} — ${t.role}`}
-                    className="h-full w-full object-cover object-top transition-all duration-500 [filter:saturate(0.85)_contrast(1.08)_brightness(0.92)] group-hover:[filter:saturate(1)_contrast(1.05)_brightness(1)]"
+                    className="absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 [filter:saturate(0.85)_contrast(1.08)_brightness(0.92)] group-hover:[filter:saturate(1)_contrast(1.05)_brightness(1)]"
                     loading="lazy"
                   />
-                  {/* Warm gold duotone overlay (multiply) */}
+                  {/* Warm gold duotone overlay */}
                   <div
                     className="absolute inset-0 z-10 mix-blend-soft-light transition-opacity duration-500 group-hover:opacity-40"
                     style={{ backgroundColor: "#c9a227" }}
@@ -52,8 +53,8 @@ export function Teachers() {
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-noir via-noir/20 to-transparent" />
                   <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(14,12,11,0.55)_100%)]" />
 
-                  {/* Name plate on photo (film-credit style) */}
-                  <div className="relative z-20 w-full p-3 sm:p-4">
+                  {/* Name plate on photo (film-credit style) — full width, pinned to bottom */}
+                  <div className="absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4">
                     <div className="font-latin text-[10px] tracking-[0.2em] text-gold">
                       {t.role}
                     </div>

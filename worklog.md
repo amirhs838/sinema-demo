@@ -67,3 +67,21 @@ Stage Summary:
 - Screenwriting article now has a cinematic image (script + pen + warm lamp) — all 3 JOURNAL cards have photos.
 - Mobile fully responsive: no horizontal overflow, appropriately scaled typography, stacked single-column layouts, shorter teacher cards, tighter padding, safe-area aware. Every section verified at 8-9/10 on mobile.
 - Artifacts: public/images/article-screenplay.png; edits to layout.tsx, globals.css, and all 8 section components.
+
+---
+Task ID: 4
+Agent: main (Z.ai Code)
+Task: Fix broken CAST & CREW / teachers section — text cut off, half content not visible on both desktop and mobile.
+
+Work Log:
+- Root-caused the bug: the portrait container used `flex items-end` but the `<img>` was in normal flow (position: static). As a flex item alongside the name plate, the image (w-full) and name plate (w-full) split the row width — image got ~362px, name plate got only ~96px. The teacher name at 24px couldn't fit in 96px, so it wrapped/clipped. Role text was also cut.
+- JS measurement confirmed: nameplateW=96px (should be ~387px = full card width), imgPos="static".
+- Fix: changed portrait container from `flex items-end justify-center` to plain `relative` (no flex). Made the `<img>` a background layer via `absolute inset-0 h-full w-full object-cover object-top`. Made the name plate a full-width bottom overlay via `absolute inset-x-0 bottom-0 z-20`. Removed the now-unnecessary `relative z-20 w-full` on the name plate.
+- Lint clean.
+- Browser-verified (desktop 1440 + mobile 390):
+  • Desktop: imgW=387px (full width), imgPos=absolute; nameplateW=387px (full width), namePos=absolute; all 3 names (رامین راستاد/حدیث تهرانی/رحیم نوروزی) render single-line at 32px height, roles at 15px — no clipping.
+  • Mobile: imgW=356px, nameplateW=356px, nameH=28px, no horizontal overflow.
+  • VLM: desktop 9/10, mobile 9/10 — photos fill full card width, name+role visible full-width at bottom, bio fully readable, no cut-off text.
+
+Stage Summary:
+- Teachers section fixed: photos now fill the full card width as background layers, name+role plates overlay at full width across the bottom, bio fully readable below. Works on both desktop and mobile. Single-line change pattern (image absolute + name plate absolute bottom) resolved the flex-layout conflict.
