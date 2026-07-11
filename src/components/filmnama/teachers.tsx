@@ -3,16 +3,8 @@ import { Reveal } from "./reveal";
 
 // ============================================================
 // ۶. اساتید — به سبک تیتراژ فیلم (Cast & Crew)
-//    پرتره‌ها به‌صورت سیلوئت/مونوگرام سینمایی (بدون چهرهٔ ساختگی)
+//    عکس‌های واقعی اساتید با درمانِ سینمایی گرم (duotone طلایی روی نویر)
 // ============================================================
-
-function Silhouette({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 120" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M50 10c-12 0-21 9-21 21 0 9 5 16 12 19-16 5-28 20-28 38v12h74V88c0-18-12-33-28-38 7-3 12-10 12-19 0-12-9-21-21-21z" />
-    </svg>
-  );
-}
 
 export function Teachers() {
   return (
@@ -34,39 +26,46 @@ export function Teachers() {
           {TEACHERS.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08}>
               <article className="group h-full overflow-hidden rounded-sm border border-divider bg-noir transition-colors hover:border-gold/60">
-                {/* Cinematic monogram portrait */}
-                <div className="spotlight relative flex aspect-[4/5] items-center justify-center overflow-hidden border-b border-divider">
+                {/* Cinematic portrait — real photo with warm duotone treatment */}
+                <div className="spotlight relative flex aspect-[4/5] items-end justify-center overflow-hidden border-b border-divider">
                   {/* corner slate labels */}
-                  <span className="absolute start-3 top-3 font-latin text-[10px] tracking-widest text-gold/70">
+                  <span className="absolute start-3 top-3 z-20 bg-noir/75 px-2 py-0.5 font-latin text-[10px] tracking-widest text-gold">
                     CAST
                   </span>
-                  <span className="absolute end-3 top-3 font-latin text-[10px] tracking-widest text-gold/70">
+                  <span className="absolute end-3 top-3 z-20 bg-noir/75 px-2 py-0.5 font-latin text-[10px] tracking-widest text-ivory">
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  {/* silhouette */}
-                  <Silhouette className="absolute bottom-0 h-3/4 w-auto text-gold/12" />
+                  {/* Photo — warm sepia/gold tint + contrast for noir cohesion */}
+                  <img
+                    src={t.image}
+                    alt={`${t.name} — ${t.role}`}
+                    className="h-full w-full object-cover object-top transition-all duration-500 [filter:saturate(0.85)_contrast(1.08)_brightness(0.92)] group-hover:[filter:saturate(1)_contrast(1.05)_brightness(1)]"
+                    loading="lazy"
+                  />
+                  {/* Warm gold duotone overlay (multiply) */}
+                  <div
+                    className="absolute inset-0 z-10 mix-blend-soft-light transition-opacity duration-500 group-hover:opacity-40"
+                    style={{ backgroundColor: "#c9a227" }}
+                  />
+                  {/* Noir vignette + bottom fade into card */}
+                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-noir via-noir/20 to-transparent" />
+                  <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(14,12,11,0.55)_100%)]" />
 
-                  {/* monogram initials */}
-                  <div className="relative z-10 text-center">
-                    <div className="font-display text-6xl font-extrabold text-gold/35">
-                      {t.initials}
+                  {/* Name plate on photo (film-credit style) */}
+                  <div className="relative z-20 w-full p-4">
+                    <div className="font-latin text-[10px] tracking-[0.2em] text-gold">
+                      {t.role}
                     </div>
+                    <h3 className="mt-0.5 font-display text-2xl font-extrabold text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                      {t.name}
+                    </h3>
                   </div>
-
-                  {/* bottom fade */}
-                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-noir to-transparent" />
                 </div>
 
-                {/* Info */}
+                {/* Bio */}
                 <div className="p-5">
-                  <div className="font-latin text-[11px] tracking-[0.2em] text-gold">
-                    {t.role}
-                  </div>
-                  <h3 className="mt-1.5 font-display text-2xl font-extrabold text-ivory">
-                    {t.name}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-khaki">{t.bio}</p>
+                  <p className="text-sm leading-relaxed text-khaki">{t.bio}</p>
                 </div>
               </article>
             </Reveal>

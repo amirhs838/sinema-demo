@@ -17,3 +17,22 @@ Stage Summary:
 - Homepage complete & browser-verified. Real brand info used throughout (no Lorem Ipsum). Anti-cliché checklist honored (no purple-blue gradients, no centered hero w/ round gradient buttons, no glassmorphism, no rounded-2xl-everything, custom icons, real cinema imagery).
 - Artifacts: src/app/{page.tsx,layout.tsx,globals.css}, src/components/filmnama/*.tsx, public/images/{hero-cinema,screening-seats,article-editing,article-clapper}.png
 - Note: sandbox kills background dev-server processes when a Bash command returns; server must be (re)started for live preview.
+
+---
+Task ID: 2
+Agent: main (Z.ai Code)
+Task: Add real photos of the three teachers (search the web) and replace empty testimonial frames with realistic, human-sounding Persian reviews.
+
+Work Log:
+- Used image-search skill (z-ai image-search CLI) to find public web photos of رامین راستاد، حدیث تهرانی، رحیم نوروزی (Persian queries).
+- Downloaded 2 candidate portraits per teacher, verified each with VLM (z-ai vision) for clarity, professionalism, absence of watermarks, and fit on dark cinema site.
+- Selected best portrait per teacher (all rated 8/10): ramin-b1 (portrait orientation, male 40s), hadis-3 (female), rahim-3 (male 40s). Copied to public/images/teacher-{ramin-rastad,hadis-tehrani,rahim-norouzi}.jpg.
+- Updated data.ts: added `image` field to Teacher type; added VOICES array with 3 realistic Persian testimonials (نگار/بازیگری، امیرحسین/فیلمنامه‌نویسی، سارا/تدوین) — colloquial, human-toned, mentioning real details (آقای راستاد، فیلم کوتاه خروجی، مدرک بین‌المللی، اندیشه).
+- Rewrote teachers.tsx: replaced monogram-silhouette portrait with real photo + cinematic treatment (warm sepia/gold duotone via mix-blend-soft-light overlay, saturate/contrast/brightness filter, noir vignette + bottom fade, film-credit name plate on photo, CAST + number corner slates, hover brightens filter).
+- Rewrote testimonials.tsx: 3 figure cards with star row, big quote mark, blockquote, initials-avatar + name/field figcaption; plus a slim Instagram invite banner below.
+- Lint clean. Browser-verified: 3 teacher photos load (naturalWidth 1200, complete, displayed ~362–387px) with duotone filter applied; 3 testimonials render with real quotes; invite present. VLM rated teachers section 9/10 (warm golden tint, professional, no broken images).
+
+Stage Summary:
+- Teachers now show real searched portraits with cohesive noir+gold cinematic treatment instead of monogram silhouettes.
+- Testimonials filled with 3 realistic, human-toned Persian reviews (replacing empty frames) + retained Instagram invite.
+- Artifacts updated: src/components/filmnama/{data.ts,teachers.tsx,testimonials.tsx}, public/images/teacher-*.jpg

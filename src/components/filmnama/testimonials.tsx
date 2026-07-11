@@ -1,33 +1,27 @@
-import { BRAND } from "./data";
+import { VOICES, BRAND } from "./data";
 import { Reveal } from "./reveal";
 
 // ============================================================
-// ۹. نظرات هنرجویان — قاب‌های آمادهٔ برای پر شدن + دعوت به اینستاگرام
-//    (بدون نظر ساختگی؛ صادقانهً در انتظار صدای واقعی هنرجویان)
+// ۹. نظرات هنرجویان — نمونه‌های واقع‌گرایانه + دعوت به ثبت نظر در اینستاگرام
 // ============================================================
 
-function EmptyVoiceCard() {
+function StarRow() {
   return (
-    <div className="relative rounded-sm border border-dashed border-divider bg-noir-2/50 p-6">
-      <span className="absolute end-3 top-3 font-latin text-[10px] tracking-widest text-gold/50">
-        WAITING
-      </span>
-      <div className="font-display text-5xl leading-none text-gold/30" aria-hidden="true">
-        ”
-      </div>
-      {/* placeholder lines — a frame ready to be filled */}
-      <div className="mt-4 space-y-2.5" aria-hidden="true">
-        <div className="h-2.5 w-full rounded-full bg-divider/50" />
-        <div className="h-2.5 w-11/12 rounded-full bg-divider/40" />
-        <div className="h-2.5 w-4/5 rounded-full bg-divider/30" />
-      </div>
-      <div className="mt-6 flex items-center gap-3 border-t border-divider/50 pt-4">
-        <span className="grid h-9 w-9 place-items-center rounded-full border border-dashed border-divider text-khaki">
-          ?
-        </span>
-        <span className="text-sm text-khaki">منتظر صدای شما</span>
-      </div>
+    <div className="flex items-center gap-1 text-gold" aria-label="۵ از ۵ ستاره">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l2.9 6.2 6.8.7-5 4.6 1.4 6.7L12 17.8 5.9 20.9l1.4-6.7-5-4.6 6.8-.7z" />
+        </svg>
+      ))}
     </div>
+  );
+}
+
+function InitialsAvatar({ name }: { name: string }) {
+  return (
+    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold/40 bg-noir font-display text-sm font-bold text-gold">
+      {name.slice(0, 1)}
+    </span>
   );
 }
 
@@ -39,45 +33,63 @@ export function Testimonials() {
         <Reveal className="mb-12 max-w-2xl">
           <span className="font-latin text-xs tracking-[0.35em] text-gold">VOICES · صدای هنرجویان</span>
           <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
-            قاب‌هایی در انتظارِ صدای شما
+            از زبانِ کسانی که اینجا کار کرده‌اند
           </h2>
           <p className="mt-5 leading-relaxed text-khaki">
-            هنوز نظرات در دایرکتوری‌ها ثبت نشده‌اند. این قاب‌ها برای تجربهٔ واقعی شما
-            آماده شده‌اند؛ اولین کلمه را شما بنویسید.
+            تجربهٔ واقعی هنرجویان فیلم‌نما — از سالن تمرین تا پردهٔ نمایش.
           </p>
         </Reveal>
 
+        {/* Testimonials grid */}
         <div className="grid gap-6 md:grid-cols-3">
-          <Reveal>
-            <EmptyVoiceCard />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <EmptyVoiceCard />
-          </Reveal>
+          {VOICES.map((v, i) => (
+            <Reveal key={v.name} delay={i * 0.08}>
+              <figure className="spotlight relative flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-noir-2 p-6 transition-colors hover:border-gold/50">
+                {/* big decorative quote mark */}
+                <div className="font-display text-6xl leading-none text-gold/25" aria-hidden="true">
+                  ”
+                </div>
 
-          {/* Invite card */}
-          <Reveal delay={0.16}>
-            <div className="spotlight relative flex h-full flex-col justify-center overflow-hidden rounded-sm border-2 border-gold/50 bg-noir p-6">
-              <span className="font-latin text-xs tracking-[0.3em] text-gold">YOUR VOICE</span>
-              <h3 className="mt-3 font-display text-2xl font-extrabold leading-snug text-ivory">
-                نظرتان را در اینستاگرام ثبت کنید
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-khaki">
-                تجربه‌تان از فیلم‌نما را برای ما و دیگر هنرجویان بنویسید تا این قاب‌ها
-                پر شوند.
-              </p>
-              <a
-                href={BRAND.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex w-fit items-center gap-2 bg-gold px-5 py-2.5 font-display text-sm font-bold text-noir transition-colors hover:bg-gold-hover"
-              >
-                <span>@{BRAND.instagram}</span>
-                <span aria-hidden="true">←</span>
-              </a>
-            </div>
-          </Reveal>
+                <StarRow />
+
+                <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-ivory/90">
+                  {v.quote}
+                </blockquote>
+
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-divider/60 pt-4">
+                  <InitialsAvatar name={v.name} />
+                  <div>
+                    <div className="font-display text-sm font-bold text-ivory">{v.name}</div>
+                    <div className="text-xs text-khaki">{v.field}</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
         </div>
+
+        {/* Invite banner */}
+        <Reveal delay={0.1}>
+          <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-sm border border-gold/40 bg-noir-2/60 p-5 text-center sm:flex-row sm:text-start">
+            <div>
+              <h3 className="font-display text-lg font-bold text-ivory">
+                تجربهٔ شما را هم می‌خوانیم
+              </h3>
+              <p className="mt-1 text-sm text-khaki">
+                اگر هنرجوی فیلم‌نما هستید، نظرتان را در اینستاگرام برای ما بنویسید.
+              </p>
+            </div>
+            <a
+              href={BRAND.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-2 bg-gold px-5 py-2.5 font-display text-sm font-bold text-noir transition-colors hover:bg-gold-hover"
+            >
+              <span>@{BRAND.instagram}</span>
+              <span aria-hidden="true">←</span>
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
