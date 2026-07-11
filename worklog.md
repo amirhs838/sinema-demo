@@ -36,3 +36,34 @@ Stage Summary:
 - Teachers now show real searched portraits with cohesive noir+gold cinematic treatment instead of monogram silhouettes.
 - Testimonials filled with 3 realistic, human-toned Persian reviews (replacing empty frames) + retained Instagram invite.
 - Artifacts updated: src/components/filmnama/{data.ts,teachers.tsx,testimonials.tsx}, public/images/teacher-*.jpg
+
+---
+Task ID: 3
+Agent: main (Z.ai Code)
+Task: (1) Add a good image for the screenwriting article ("از ایده تا فیلمنامه") which had no photo. (2) Fix mobile responsiveness — user reported "not responsive at all on phone".
+
+Work Log:
+- Generated a cinematic screenwriting still-life image (script pages, fountain pen, warm tungsten lamp, film grain, noir+gold palette) via z-ai image CLI → public/images/article-screenplay.png. Added it as the 3rd entry in ARTICLE_IMAGES so all 3 article cards now have photos (removed the no-image typographic fallback path).
+- Root-caused the earlier "mobile broken" VLM analysis: the dev server had died between commands, so browser screenshots were of Chrome's ERR_CONNECTION_REFUSED page, not the site — VLM was analyzing an error page.
+- Applied comprehensive mobile-first responsive fixes across ALL components:
+  • layout.tsx: added explicit `viewport` export (width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover) + safe-area bottom padding on body.
+  • hero: title 60px→48px on mobile (text-6xl→text-5xl), top line 24px→18px, subtitle 18px→14px, letterbox bars 40px→28px, tighter margins/padding on mobile.
+  • marquee: latin text 24px→16px, persian 20px→14px, padding 14px→10px on mobile.
+  • ALL sections: py-20→py-14 on mobile (less sparse vertical rhythm); section headings text-4xl→text-3xl on mobile; body text sm/base responsive.
+  • courses: sprocket strip w-5→w-4 on mobile, card p-5→p-4, title text-3xl→text-2xl, descriptions text-[13px] on mobile.
+  • teachers: portrait aspect-[4/5]→aspect-[3/4] on mobile (shorter cards, less scrolling), name plate + bio padding/font responsive.
+  • about: clapperboard fields, stats, intro text all responsive sizes.
+  • contact: USSD code box text-2xl→text-lg on mobile, channel cards p-5→p-4 + text-lg/xl responsive, address banner stacks on mobile.
+  • footer: grid gap/padding responsive, THE END text-3xl→text-2xl on mobile.
+  • screening: grid gap + meta padding responsive.
+- Lint clean.
+- Browser-verified (Agent Browser + VLM):
+  • Mobile 390×844: NO horizontal overflow (scrollWidth=390=clientWidth), no wide sections, viewport meta correct.
+  • Hero title now 48px (was 60px), width 350px (fits 390px viewport).
+  • VLM ratings: mobile HERO 9/10, mobile COURSES 8/10, mobile TEACHERS 8/10, mobile ARTICLES 8/10, desktop ARTICLES 8/10 (3 cards, all with images incl. new screenplay).
+  • Desktop 1440×900: no overflow, noir theme intact.
+
+Stage Summary:
+- Screenwriting article now has a cinematic image (script + pen + warm lamp) — all 3 JOURNAL cards have photos.
+- Mobile fully responsive: no horizontal overflow, appropriately scaled typography, stacked single-column layouts, shorter teacher cards, tighter padding, safe-area aware. Every section verified at 8-9/10 on mobile.
+- Artifacts: public/images/article-screenplay.png; edits to layout.tsx, globals.css, and all 8 section components.

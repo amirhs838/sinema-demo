@@ -19,14 +19,14 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-noir/40" />
 
       {/* Top letterbox bar */}
-      <div className="letterbox-bar relative z-10 h-10 sm:h-14" />
+      <div className="letterbox-bar relative z-10 h-7 sm:h-14" />
 
       {/* Main content — asymmetric poster block aligned to start (right in RTL) */}
       <div className="relative z-10 flex flex-1 items-center">
-        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-6 sm:py-10 lg:px-8">
           <Reveal className="max-w-3xl">
             {/* Kicker */}
-            <div className="mb-6 flex items-center gap-3">
+            <div className="mb-5 flex items-center gap-3 sm:mb-6">
               <span className="h-px w-10 bg-gold" aria-hidden="true" />
               <span className="font-latin text-[11px] tracking-[0.35em] text-gold sm:text-xs">
                 FILMNAMA · CINEMA WORKSHOP
@@ -34,21 +34,21 @@ export function Hero() {
             </div>
 
             {/* Poster-style stacked title */}
-            <h1 className="font-display font-extrabold leading-[0.95]">
-              <span className="block text-2xl text-khaki sm:text-3xl">آموزشگاه آزاد</span>
-              <span className="mt-1 block bg-gradient-to-b from-gold-hover to-gold bg-clip-text text-6xl text-transparent sm:text-7xl lg:text-8xl">
+            <h1 className="font-display font-extrabold leading-[0.98]">
+              <span className="block text-lg text-khaki sm:text-3xl">آموزشگاه آزاد</span>
+              <span className="mt-0.5 block bg-gradient-to-b from-gold-hover to-gold bg-clip-text text-5xl text-transparent sm:text-7xl lg:text-8xl">
                 سینمایی
               </span>
-              <span className="block text-6xl text-ivory sm:text-7xl lg:text-8xl">فیلم‌نما</span>
+              <span className="block text-5xl text-ivory sm:text-7xl lg:text-8xl">فیلم‌نما</span>
             </h1>
 
             {/* Tagline subtitle */}
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-khaki sm:text-lg">
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-khaki sm:mt-6 sm:max-w-xl sm:text-lg">
               {BRAND.tagline}
             </p>
 
             {/* CTAs */}
-            <div className="mt-9 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+            <div className="mt-7 flex flex-col items-start gap-5 sm:mt-9 sm:flex-row sm:items-center sm:gap-6">
               {/* Ticket CTA with perforated edge */}
               <a
                 href="#courses"
@@ -89,7 +89,7 @@ export function Hero() {
       </div>
 
       {/* Bottom letterbox bar */}
-      <div className="letterbox-bar relative z-10 h-10 sm:h-14" />
+      <div className="letterbox-bar relative z-10 h-7 sm:h-14" />
     </section>
   );
 }

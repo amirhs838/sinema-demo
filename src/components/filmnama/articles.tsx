@@ -8,17 +8,18 @@ import { Reveal } from "./reveal";
 const ARTICLE_IMAGES = [
   "/images/article-editing.png",
   "/images/article-clapper.png",
+  "/images/article-screenplay.png",
 ];
 
 export function Articles() {
   return (
-    <section id="articles" className="relative border-b border-divider bg-noir-2 py-20 sm:py-28">
+    <section id="articles" className="relative border-b border-divider bg-noir-2 py-14 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-4">
+        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4 sm:mb-12">
           <div className="max-w-2xl">
             <span className="font-latin text-xs tracking-[0.35em] text-gold">JOURNAL · مجلهٔ سینمایی</span>
-            <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
+            <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
               از پشتِ دوربینِ فیلم‌نما
             </h2>
           </div>
@@ -80,7 +81,7 @@ export function Articles() {
                   className="group flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-noir-2 transition-colors hover:border-gold/60"
                 >
                   {/* Image */}
-                  <div className="relative aspect-[16/10] overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden sm:aspect-[16/10]">
                     <img
                       src={img}
                       alt={a.title}
@@ -93,12 +94,12 @@ export function Articles() {
                     </span>
                   </div>
                   {/* Body */}
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-display text-xl font-extrabold leading-snug text-ivory">
+                  <div className="flex flex-1 flex-col p-4 sm:p-5">
+                    <h3 className="font-display text-lg font-extrabold leading-snug text-ivory sm:text-xl">
                       {a.title}
                     </h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-khaki">{a.desc}</p>
-                    <div className="mt-5 flex items-center justify-between border-t border-divider/60 pt-3">
+                    <p className="mt-2 flex-1 text-[13px] leading-relaxed text-khaki sm:text-sm">{a.desc}</p>
+                    <div className="mt-4 flex items-center justify-between border-t border-divider/60 pt-3 sm:mt-5">
                       <span className="font-latin text-[10px] tracking-widest text-gold">
                         {a.read}
                       </span>

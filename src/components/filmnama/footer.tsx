@@ -51,7 +51,7 @@ export function Footer() {
     <footer className="mt-auto bg-noir">
       {/* Top: brand + links + contact */}
       <div className="border-b border-divider">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:px-8">
           {/* Brand */}
           <div className="lg:col-span-5">
             <div className="flex items-center gap-2.5">
@@ -143,16 +143,16 @@ export function Footer() {
       </div>
 
       {/* End-credits card */}
-      <div className="mx-auto max-w-7xl px-4 py-10 text-center sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 text-center sm:px-6 sm:py-10 lg:px-8">
         {/* film-strip divider */}
-        <div className="mx-auto mb-6 flex max-w-xs items-center justify-center gap-1.5" aria-hidden="true">
+        <div className="mx-auto mb-5 flex max-w-xs items-center justify-center gap-1.5 sm:mb-6" aria-hidden="true">
           {Array.from({ length: 12 }).map((_, i) => (
             <span key={i} className="h-2 w-3 rounded-[1px] bg-divider" />
           ))}
         </div>
-        <div className="font-latin text-3xl tracking-[0.4em] text-gold sm:text-4xl">THE END</div>
-        <div className="mt-2 font-display text-lg text-khaki">پایان</div>
-        <p className="mt-5 text-xs text-khaki/70">
+        <div className="font-latin text-2xl tracking-[0.4em] text-gold sm:text-4xl">THE END</div>
+        <div className="mt-2 font-display text-base text-khaki sm:text-lg">پایان</div>
+        <p className="mt-4 text-xs text-khaki/70 sm:mt-5">
           © {new Date().getFullYear()} {BRAND.fullName} — تمام حقوق محفوظ است.
         </p>
       </div>

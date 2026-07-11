@@ -23,7 +23,7 @@ export function Screening() {
   return (
     <section
       id="screening"
-      className="relative overflow-hidden border-b border-divider bg-noir py-20 sm:py-28"
+      className="relative overflow-hidden border-b border-divider bg-noir py-14 sm:py-28"
     >
       {/* Cinema-seats backdrop */}
       <img
@@ -37,18 +37,18 @@ export function Screening() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <Reveal className="mb-12 max-w-2xl">
+        <Reveal className="mb-10 max-w-2xl sm:mb-12">
           <span className="font-latin text-xs tracking-[0.35em] text-gold">SCREENING ROOM · اتاق نمایش</span>
-          <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
+          <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
             آثارِ هنرجویان روی پرده
           </h2>
-          <p className="mt-5 leading-relaxed text-khaki">
+          <p className="mt-5 text-sm leading-relaxed text-khaki sm:text-base">
             فیلم‌های کوتاهی که در کارگاه فیلم‌نما ساخته شده‌اند؛ از ایده تا کات نهایی،
             دستِ هنرجویان ما بوده است.
           </p>
         </Reveal>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
           {WORKS.map((w, i) => (
             <Reveal key={w.title} delay={i * 0.08}>
               <a
@@ -80,7 +80,7 @@ export function Screening() {
                 </div>
 
                 {/* Meta */}
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <div className="font-latin text-[11px] tracking-[0.2em] text-khaki">
                     {w.kind}
                   </div>

@@ -27,15 +27,15 @@ function InitialsAvatar({ name }: { name: string }) {
 
 export function Testimonials() {
   return (
-    <section id="voices" className="relative border-b border-divider bg-noir py-20 sm:py-28">
+    <section id="voices" className="relative border-b border-divider bg-noir py-14 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <Reveal className="mb-12 max-w-2xl">
+        <Reveal className="mb-10 max-w-2xl sm:mb-12">
           <span className="font-latin text-xs tracking-[0.35em] text-gold">VOICES · صدای هنرجویان</span>
-          <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
+          <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
             از زبانِ کسانی که اینجا کار کرده‌اند
           </h2>
-          <p className="mt-5 leading-relaxed text-khaki">
+          <p className="mt-5 text-sm leading-relaxed text-khaki sm:text-base">
             تجربهٔ واقعی هنرجویان فیلم‌نما — از سالن تمرین تا پردهٔ نمایش.
           </p>
         </Reveal>
@@ -44,19 +44,19 @@ export function Testimonials() {
         <div className="grid gap-6 md:grid-cols-3">
           {VOICES.map((v, i) => (
             <Reveal key={v.name} delay={i * 0.08}>
-              <figure className="spotlight relative flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-noir-2 p-6 transition-colors hover:border-gold/50">
+              <figure className="spotlight relative flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-noir-2 p-5 transition-colors hover:border-gold/50 sm:p-6">
                 {/* big decorative quote mark */}
-                <div className="font-display text-6xl leading-none text-gold/25" aria-hidden="true">
+                <div className="font-display text-5xl leading-none text-gold/25 sm:text-6xl" aria-hidden="true">
                   ”
                 </div>
 
                 <StarRow />
 
-                <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-ivory/90">
+                <blockquote className="mt-3 flex-1 text-[13px] leading-relaxed text-ivory/90 sm:mt-4 sm:text-[15px]">
                   {v.quote}
                 </blockquote>
 
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-divider/60 pt-4">
+                <figcaption className="mt-5 flex items-center gap-3 border-t border-divider/60 pt-4 sm:mt-6">
                   <InitialsAvatar name={v.name} />
                   <div>
                     <div className="font-display text-sm font-bold text-ivory">{v.name}</div>

@@ -8,7 +8,7 @@ import { Reveal } from "./reveal";
 
 function SprocketStrip() {
   return (
-    <div className="sprocket-strip w-5 shrink-0" aria-hidden="true">
+    <div className="sprocket-strip w-4 shrink-0 sm:w-5" aria-hidden="true">
       {Array.from({ length: 7 }).map((_, i) => (
         <span key={i} className="sprocket-hole" />
       ))}
@@ -18,15 +18,15 @@ function SprocketStrip() {
 
 export function Courses() {
   return (
-    <section id="courses" className="relative border-b border-divider bg-noir py-20 sm:py-28">
+    <section id="courses" className="relative border-b border-divider bg-noir py-14 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <Reveal className="mb-12 max-w-2xl">
+        <Reveal className="mb-10 max-w-2xl sm:mb-12">
           <span className="font-latin text-xs tracking-[0.35em] text-gold">COURSES · دوره‌ها</span>
-          <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
+          <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
             هفت رشته، یک کارگاه
           </h2>
-          <p className="mt-5 leading-relaxed text-khaki">
+          <p className="mt-5 text-sm leading-relaxed text-khaki sm:text-base">
             از بازیگری مقابل دوربین تا تدوین و فن بیان — هر رشته در فیلم‌نما با هم‌وزنی
             کامل آموزش داده می‌شود. روی هر فریم بگذارید تا تکان بخورد.
           </p>
@@ -48,7 +48,7 @@ export function Courses() {
                 <SprocketStrip />
 
                 {/* Frame content */}
-                <div className="flex flex-1 flex-col p-5">
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-latin text-[11px] tracking-[0.2em] text-gold">
                       {c.scene}
@@ -60,16 +60,16 @@ export function Courses() {
                     )}
                   </div>
 
-                  <h3 className="mt-5 font-display text-3xl font-extrabold text-ivory">
+                  <h3 className="mt-4 font-display text-2xl font-extrabold text-ivory sm:mt-5 sm:text-3xl">
                     {c.fa}
                   </h3>
-                  <div className="font-latin mt-1 text-sm tracking-[0.15em] text-khaki">
+                  <div className="font-latin mt-1 text-xs tracking-[0.15em] text-khaki sm:text-sm">
                     {c.en}
                   </div>
 
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-khaki">{c.desc}</p>
+                  <p className="mt-3 flex-1 text-[13px] leading-relaxed text-khaki sm:mt-4 sm:text-sm">{c.desc}</p>
 
-                  <div className="mt-5 inline-flex items-center gap-1.5 text-sm text-gold">
+                  <div className="mt-4 inline-flex items-center gap-1.5 text-xs text-gold sm:mt-5 sm:text-sm">
                     <span>{c.comingSoon ? "استعلام زمان‌بندی" : "ثبت‌نام این دوره"}</span>
                     <span className="transition-transform duration-300 group-hover:-translate-x-1">←</span>
                   </div>

@@ -105,15 +105,15 @@ export function Contact() {
   )}`;
 
   return (
-    <section id="contact" className="relative border-b border-divider bg-noir-2 py-20 sm:py-28">
+    <section id="contact" className="relative border-b border-divider bg-noir-2 py-14 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <Reveal className="mb-12 max-w-2xl">
+        <Reveal className="mb-10 max-w-2xl sm:mb-12">
           <span className="font-latin text-xs tracking-[0.35em] text-gold">BOX OFFICE · باجهٔ بلیت‌فروشی</span>
-          <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
+          <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
             ثبت‌نام و تماس با فیلم‌نما
           </h2>
-          <p className="mt-5 leading-relaxed text-khaki">
+          <p className="mt-5 text-sm leading-relaxed text-khaki sm:text-base">
             سیستم ثبت‌نام آنلاین نداریم؛ اما همهٔ راه‌های تماس اینجا هستند. کافی است
             زنگ بزنید یا کد USSD را شماره‌گیری کنید.
           </p>
@@ -122,24 +122,24 @@ export function Contact() {
         {/* USSD featured booth */}
         <Reveal>
           <div className="relative overflow-hidden rounded-sm border-2 border-gold/50 bg-noir">
-            <div className="flex items-center justify-between border-b border-gold/30 bg-gold/5 px-5 py-3 sm:px-6">
-              <span className="font-latin text-xs tracking-[0.25em] text-gold sm:text-sm">
+            <div className="flex items-center justify-between border-b border-gold/30 bg-gold/5 px-4 py-3 sm:px-6">
+              <span className="font-latin text-[11px] tracking-[0.25em] text-gold sm:text-sm">
                 BOX OFFICE · ثبت‌نام سریع
               </span>
               <span className="lamp-dot inline-block h-2 w-2 rounded-full bg-gold shadow-[0_0_8px_2px_rgba(201,162,39,0.6)]" />
             </div>
-            <div className="grid items-center gap-6 p-5 sm:p-6 md:grid-cols-2">
+            <div className="grid items-center gap-5 p-4 sm:gap-6 sm:p-6 md:grid-cols-2">
               <div>
-                <h3 className="font-display text-2xl font-extrabold text-ivory sm:text-3xl">
+                <h3 className="font-display text-xl font-extrabold text-ivory sm:text-3xl">
                   با یک کد USSD ثبت‌نام کنید
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-khaki">
+                <p className="mt-2 text-[13px] leading-relaxed text-khaki sm:text-sm">
                   کد زیر را شماره‌گیری کنید تا کارشناسان ما برای تکمیل ثبت‌نام با شما
                   تماس بگیرند. (دکمهٔ کپی هم در کنار آن است.)
                 </p>
               </div>
-              <div className="flex items-center justify-between gap-3 rounded-sm border border-divider bg-noir-2 px-4 py-4 sm:px-5">
-                <code className="font-latin text-2xl tracking-[0.15em] text-gold sm:text-3xl" dir="ltr">
+              <div className="flex items-center justify-between gap-3 rounded-sm border border-divider bg-noir-2 px-3 py-3.5 sm:px-5 sm:py-4">
+                <code className="font-latin text-lg tracking-[0.12em] text-gold sm:text-3xl" dir="ltr">
                   {BRAND.ussd}
                 </code>
                 <CopyButton value={BRAND.ussd} label="کپی کد" />
@@ -149,21 +149,21 @@ export function Contact() {
         </Reveal>
 
         {/* Contact channels grid */}
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-5 grid gap-4 sm:mt-6 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
           {/* Mobile */}
           <Reveal>
             <a
               href={`tel:${BRAND.phoneMobile}`}
-              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-5 transition-colors hover:border-gold/60"
+              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-4 transition-colors hover:border-gold/60 sm:p-5"
             >
               <div className="flex items-center justify-between">
                 <IconPhone className="h-6 w-6 text-gold" />
                 <span className="font-latin text-[10px] tracking-widest text-khaki">MOBILE</span>
               </div>
-              <div className="mt-4 font-latin text-xl tracking-wider text-ivory" dir="ltr">
+              <div className="mt-3 font-latin text-lg tracking-wider text-ivory sm:mt-4 sm:text-xl" dir="ltr">
                 {BRAND.phoneMobile}
               </div>
-              <div className="mt-1 text-sm text-khaki">تماس مستقیم (موبایل)</div>
+              <div className="mt-1 text-xs text-khaki sm:text-sm">تماس مستقیم (موبایل)</div>
             </a>
           </Reveal>
 
@@ -171,16 +171,16 @@ export function Contact() {
           <Reveal delay={0.06}>
             <a
               href={`tel:${BRAND.phoneLandline}`}
-              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-5 transition-colors hover:border-gold/60"
+              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-4 transition-colors hover:border-gold/60 sm:p-5"
             >
               <div className="flex items-center justify-between">
                 <IconPhone className="h-6 w-6 text-gold" />
                 <span className="font-latin text-[10px] tracking-widest text-khaki">LANDLINE</span>
               </div>
-              <div className="mt-4 font-latin text-xl tracking-wider text-ivory" dir="ltr">
+              <div className="mt-3 font-latin text-lg tracking-wider text-ivory sm:mt-4 sm:text-xl" dir="ltr">
                 {BRAND.phoneLandline}
               </div>
-              <div className="mt-1 text-sm text-khaki">تلفن ثابت آموزشگاه</div>
+              <div className="mt-1 text-xs text-khaki sm:text-sm">تلفن ثابت آموزشگاه</div>
             </a>
           </Reveal>
 
@@ -190,40 +190,40 @@ export function Contact() {
               href={BRAND.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-5 transition-colors hover:border-gold/60"
+              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-4 transition-colors hover:border-gold/60 sm:p-5"
             >
               <div className="flex items-center justify-between">
                 <IconInstagram className="h-6 w-6 text-gold" />
                 <span className="font-latin text-[10px] tracking-widest text-khaki">INSTAGRAM</span>
               </div>
-              <div className="mt-4 font-latin text-xl tracking-wider text-ivory" dir="ltr">
+              <div className="mt-3 font-latin text-lg tracking-wider text-ivory sm:mt-4 sm:text-xl" dir="ltr">
                 @{BRAND.instagram}
               </div>
-              <div className="mt-1 text-sm text-khaki">آخرین اخبار و آثار</div>
+              <div className="mt-1 text-xs text-khaki sm:text-sm">آخرین اخبار و آثار</div>
             </a>
           </Reveal>
 
           {/* Hours */}
           <Reveal delay={0.18}>
-            <div className="flex h-full flex-col rounded-sm border border-divider bg-noir p-5">
+            <div className="flex h-full flex-col rounded-sm border border-divider bg-noir p-4 sm:p-5">
               <div className="flex items-center justify-between">
                 <IconClock className="h-6 w-6 text-gold" />
                 <span className="font-latin text-[10px] tracking-widest text-khaki">HOURS</span>
               </div>
-              <div className="mt-4 font-display text-xl text-ivory">۱۳ الی ۲۱</div>
-              <div className="mt-1 text-sm text-khaki">{BRAND.hours}</div>
+              <div className="mt-3 font-display text-lg text-ivory sm:mt-4 sm:text-xl">۱۳ الی ۲۱</div>
+              <div className="mt-1 text-xs text-khaki sm:text-sm">{BRAND.hours}</div>
             </div>
           </Reveal>
         </div>
 
         {/* Address banner */}
         <Reveal delay={0.1}>
-          <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-sm border border-divider bg-noir p-5 sm:flex-row sm:items-center sm:p-6">
-            <div className="flex items-start gap-4">
+          <div className="mt-5 flex flex-col items-start justify-between gap-4 rounded-sm border border-divider bg-noir p-4 sm:mt-6 sm:flex-row sm:items-center sm:p-6">
+            <div className="flex items-start gap-3 sm:gap-4">
               <IconPin className="h-6 w-6 shrink-0 text-gold" />
               <div>
                 <div className="font-latin text-[10px] tracking-widest text-khaki">ADDRESS</div>
-                <div className="mt-1 text-ivory">{BRAND.address}</div>
+                <div className="mt-1 text-sm text-ivory sm:text-base">{BRAND.address}</div>
               </div>
             </div>
             <a

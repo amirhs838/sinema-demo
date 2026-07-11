@@ -8,15 +8,15 @@ import { Reveal } from "./reveal";
 
 export function Teachers() {
   return (
-    <section id="teachers" className="relative border-b border-divider bg-noir-2 py-20 sm:py-28">
+    <section id="teachers" className="relative border-b border-divider bg-noir-2 py-14 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <Reveal className="mb-12 max-w-2xl">
+        <Reveal className="mb-10 max-w-2xl sm:mb-12">
           <span className="font-latin text-xs tracking-[0.35em] text-gold">CAST &amp; CREW · اساتید</span>
-          <h2 className="title-rule mt-3 font-display text-4xl font-extrabold text-ivory sm:text-5xl">
+          <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
             عواملِ صحنهٔ فیلم‌نما
           </h2>
-          <p className="mt-5 leading-relaxed text-khaki">
+          <p className="mt-5 text-sm leading-relaxed text-khaki sm:text-base">
             کنار اساتیدی کار می‌کنید که خودشان جلوی دوربین و پشت صحنهٔ سینما و تلویزیون
             بوده‌اند.
           </p>
@@ -27,7 +27,7 @@ export function Teachers() {
             <Reveal key={t.name} delay={i * 0.08}>
               <article className="group h-full overflow-hidden rounded-sm border border-divider bg-noir transition-colors hover:border-gold/60">
                 {/* Cinematic portrait — real photo with warm duotone treatment */}
-                <div className="spotlight relative flex aspect-[4/5] items-end justify-center overflow-hidden border-b border-divider">
+                <div className="spotlight relative flex aspect-[3/4] items-end justify-center overflow-hidden border-b border-divider sm:aspect-[4/5]">
                   {/* corner slate labels */}
                   <span className="absolute start-3 top-3 z-20 bg-noir/75 px-2 py-0.5 font-latin text-[10px] tracking-widest text-gold">
                     CAST
@@ -53,19 +53,19 @@ export function Teachers() {
                   <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(14,12,11,0.55)_100%)]" />
 
                   {/* Name plate on photo (film-credit style) */}
-                  <div className="relative z-20 w-full p-4">
+                  <div className="relative z-20 w-full p-3 sm:p-4">
                     <div className="font-latin text-[10px] tracking-[0.2em] text-gold">
                       {t.role}
                     </div>
-                    <h3 className="mt-0.5 font-display text-2xl font-extrabold text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                    <h3 className="mt-0.5 font-display text-xl font-extrabold text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] sm:text-2xl">
                       {t.name}
                     </h3>
                   </div>
                 </div>
 
                 {/* Bio */}
-                <div className="p-5">
-                  <p className="text-sm leading-relaxed text-khaki">{t.bio}</p>
+                <div className="p-4 sm:p-5">
+                  <p className="text-[13px] leading-relaxed text-khaki sm:text-sm">{t.bio}</p>
                 </div>
               </article>
             </Reveal>

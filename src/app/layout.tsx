@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 // Self-hosted fonts (fontsource) — Estedad (Persian display), Vazirmatn (Persian body), Bebas Neue (Latin accent)
@@ -12,6 +12,14 @@ import "@fontsource/estedad/800.css";
 import "@fontsource/bebas-neue/400.css";
 
 import { Toaster } from "@/components/ui/toaster";
+
+// Explicit mobile viewport — ensures proper scaling & safe-area handling on phones
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "فیلم‌نما | آموزشگاه آزاد سینمایی — کارگاه سینمایی با مدرک بین‌المللی در غرب تهران",

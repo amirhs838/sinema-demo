@@ -117,6 +117,8 @@
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Respect iOS safe area insets at the bottom (home indicator) */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   ::selection {
     background: var(--color-gold);
