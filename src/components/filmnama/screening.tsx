@@ -25,15 +25,15 @@ export function Screening() {
       id="screening"
       className="relative overflow-hidden border-b border-divider bg-noir py-14 sm:py-28"
     >
-      {/* Cinema-seats backdrop (very subtle on light bg) */}
+      {/* Cinema-seats backdrop (subtle texture on black) */}
       <img
         src="/images/screening-seats.png"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover opacity-[0.06]"
+        className="absolute inset-0 h-full w-full object-cover opacity-[0.12]"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-noir via-white/85 to-noir" />
+      <div className="absolute inset-0 bg-gradient-to-b from-noir via-noir/80 to-noir" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
@@ -56,7 +56,7 @@ export function Screening() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`مشاهدهٔ فیلم ${w.title} در اینستاگرام فیلم‌نما`}
-                className="group block overflow-hidden rounded-sm border border-divider bg-white transition-colors hover:border-gold/60"
+                className="group block overflow-hidden rounded-sm border border-divider bg-noir-2 transition-colors hover:border-gold/60"
               >
                 {/* Thumbnail */}
                 <div className="relative aspect-video overflow-hidden">

@@ -9,19 +9,18 @@
    ============================================================ */
 
 @theme {
-  /* Brand color palette — White · Red · Gray (clean modern light theme)
-     A dark cinematic hero is retained as a deliberate "screen" zone; the
-     rest of the site is a bright white/red/gray interface. */
-  --color-noir: #ffffff;        /* main background → pure white */
-  --color-noir-2: #f4f5f7;      /* panels / cards → light cool gray */
-  --color-ivory: #16181d;       /* main text → near-black (soft, not pure) */
-  --color-khaki: #6b7280;       /* helper text → medium gray */
+  /* Brand color palette — Black · Red · White (pure black cinema theme)
+     Dark site on true black; red accent + white text. Cinematic and bold. */
+  --color-noir: #000000;        /* main background → pure black */
+  --color-noir-2: #0a0a0c;      /* panels / cards → near-black (slight lift) */
+  --color-ivory: #ffffff;       /* main text → pure white */
+  --color-khaki: #9ca3af;       /* helper text → cool gray */
   --color-gold: #e11d2a;        /* primary accent → cinematic red */
-  --color-gold-hover: #b91c1c;  /* accent hover → deep red */
+  --color-gold-hover: #f52535;  /* accent hover → bright red */
   --color-crimson: #7f1d1d;     /* secondary accent → dark red (tags) */
   --color-cine-green: #1f2937;  /* neutral dark slate (success/copy state) */
-  --color-divider: #e5e7eb;     /* borders → light gray */
-  --color-ink: #0e0c0b;         /* deep black for the dark hero/photo zones */
+  --color-divider: #1f2024;     /* borders → subtle dark gray on black */
+  --color-ink: #000000;         /* deep black for the dark hero/photo zones */
 
   /* Typography */
   --font-display: "Estedad", "Yekan Bakh", system-ui, sans-serif;
@@ -70,39 +69,39 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Default theme = clean white/red/gray light theme */
+/* Default theme = pure black / red / white cinema theme */
 :root {
   --radius: 0.5rem;
-  --background: #ffffff;
-  --foreground: #16181d;
-  --card: #ffffff;
-  --card-foreground: #16181d;
-  --popover: #ffffff;
-  --popover-foreground: #16181d;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0a0a0c;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0c;
+  --popover-foreground: #ffffff;
   --primary: #e11d2a;
   --primary-foreground: #ffffff;
-  --secondary: #f4f5f7;
-  --secondary-foreground: #16181d;
-  --muted: #f4f5f7;
-  --muted-foreground: #6b7280;
+  --secondary: #0a0a0c;
+  --secondary-foreground: #ffffff;
+  --muted: #0a0a0c;
+  --muted-foreground: #9ca3af;
   --accent: #7f1d1d;
   --accent-foreground: #ffffff;
   --destructive: #b91c1c;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
+  --border: #1f2024;
+  --input: #1f2024;
   --ring: #e11d2a;
   --chart-1: #e11d2a;
   --chart-2: #7f1d1d;
-  --chart-3: #6b7280;
-  --chart-4: #16181d;
-  --chart-5: #f4f5f7;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #16181d;
+  --chart-3: #9ca3af;
+  --chart-4: #ffffff;
+  --chart-5: #0a0a0c;
+  --sidebar: #0a0a0c;
+  --sidebar-foreground: #ffffff;
   --sidebar-primary: #e11d2a;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f4f5f7;
-  --sidebar-accent-foreground: #16181d;
-  --sidebar-border: #e5e7eb;
+  --sidebar-accent: #7f1d1d;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1f2024;
   --sidebar-ring: #e11d2a;
 }
 
@@ -185,14 +184,14 @@
   );
 }
 
-/* ---- Film grain overlay (subtle on light theme) ---- */
+/* ---- Film grain overlay (screen blend so it shows on pure black) ---- */
 .film-grain {
   position: fixed;
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
+  opacity: 0.06;
+  mix-blend-mode: screen;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain-shift 0.7s steps(5) infinite;
 }
