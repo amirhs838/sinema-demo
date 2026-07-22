@@ -9,16 +9,19 @@
    ============================================================ */
 
 @theme {
-  /* Brand color palette (exact HEX from art direction) */
-  --color-noir: #0e0c0b; /* main background — warm noir */
-  --color-noir-2: #17130f; /* panels / cards — dark brown */
-  --color-ivory: #f4ede1; /* main text — warm ivory */
-  --color-khaki: #b7aa97; /* helper text — light khaki */
-  --color-gold: #c9a227; /* spotlight gold accent */
-  --color-gold-hover: #d6ad3c; /* gold hover */
-  --color-crimson: #7a1f2b; /* velvet curtain */
-  --color-cine-green: #245c51; /* cinematic emerald (rare) */
-  --color-divider: #3a332c; /* warm gray divider/border */
+  /* Brand color palette — White · Red · Gray (clean modern light theme)
+     A dark cinematic hero is retained as a deliberate "screen" zone; the
+     rest of the site is a bright white/red/gray interface. */
+  --color-noir: #ffffff;        /* main background → pure white */
+  --color-noir-2: #f4f5f7;      /* panels / cards → light cool gray */
+  --color-ivory: #16181d;       /* main text → near-black (soft, not pure) */
+  --color-khaki: #6b7280;       /* helper text → medium gray */
+  --color-gold: #e11d2a;        /* primary accent → cinematic red */
+  --color-gold-hover: #b91c1c;  /* accent hover → deep red */
+  --color-crimson: #7f1d1d;     /* secondary accent → dark red (tags) */
+  --color-cine-green: #1f2937;  /* neutral dark slate (success/copy state) */
+  --color-divider: #e5e7eb;     /* borders → light gray */
+  --color-ink: #0e0c0b;         /* deep black for the dark hero/photo zones */
 
   /* Typography */
   --font-display: "Estedad", "Yekan Bakh", system-ui, sans-serif;
@@ -67,40 +70,40 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Default theme IS the cinema noir theme (dark-only by brand design) */
+/* Default theme = clean white/red/gray light theme */
 :root {
   --radius: 0.5rem;
-  --background: #0e0c0b;
-  --foreground: #f4ede1;
-  --card: #17130f;
-  --card-foreground: #f4ede1;
-  --popover: #17130f;
-  --popover-foreground: #f4ede1;
-  --primary: #c9a227;
-  --primary-foreground: #0e0c0b;
-  --secondary: #17130f;
-  --secondary-foreground: #f4ede1;
-  --muted: #17130f;
-  --muted-foreground: #b7aa97;
-  --accent: #7a1f2b;
-  --accent-foreground: #f4ede1;
-  --destructive: #7a1f2b;
-  --border: #3a332c;
-  --input: #3a332c;
-  --ring: #c9a227;
-  --chart-1: #c9a227;
-  --chart-2: #7a1f2b;
-  --chart-3: #245c51;
-  --chart-4: #b7aa97;
-  --chart-5: #f4ede1;
-  --sidebar: #17130f;
-  --sidebar-foreground: #f4ede1;
-  --sidebar-primary: #c9a227;
-  --sidebar-primary-foreground: #0e0c0b;
-  --sidebar-accent: #7a1f2b;
-  --sidebar-accent-foreground: #f4ede1;
-  --sidebar-border: #3a332c;
-  --sidebar-ring: #c9a227;
+  --background: #ffffff;
+  --foreground: #16181d;
+  --card: #ffffff;
+  --card-foreground: #16181d;
+  --popover: #ffffff;
+  --popover-foreground: #16181d;
+  --primary: #e11d2a;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f5f7;
+  --secondary-foreground: #16181d;
+  --muted: #f4f5f7;
+  --muted-foreground: #6b7280;
+  --accent: #7f1d1d;
+  --accent-foreground: #ffffff;
+  --destructive: #b91c1c;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #e11d2a;
+  --chart-1: #e11d2a;
+  --chart-2: #7f1d1d;
+  --chart-3: #6b7280;
+  --chart-4: #16181d;
+  --chart-5: #f4f5f7;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #16181d;
+  --sidebar-primary: #e11d2a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4f5f7;
+  --sidebar-accent-foreground: #16181d;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #e11d2a;
 }
 
 @layer base {
@@ -182,14 +185,14 @@
   );
 }
 
-/* ---- Film grain overlay ---- */
+/* ---- Film grain overlay (subtle on light theme) ---- */
 .film-grain {
   position: fixed;
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain-shift 0.7s steps(5) infinite;
 }
@@ -289,7 +292,7 @@
   top: 10%;
   bottom: 10%;
   inset-inline-end: 28%;
-  border-inline-start: 2px dashed rgba(14, 12, 11, 0.45);
+  border-inline-start: 2px dashed rgba(255, 255, 255, 0.5);
   z-index: 2;
 }
 
@@ -319,12 +322,12 @@
   );
 }
 
-/* ---- Spotlight glow ---- */
+/* ---- Spotlight glow (red accent) ---- */
 .spotlight {
   background: radial-gradient(
     ellipse 60% 50% at 50% 0%,
-    rgba(201, 162, 39, 0.16) 0%,
-    rgba(201, 162, 39, 0.05) 35%,
+    rgba(225, 29, 42, 0.08) 0%,
+    rgba(225, 29, 42, 0.03) 35%,
     transparent 70%
   );
 }

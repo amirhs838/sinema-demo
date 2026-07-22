@@ -30,7 +30,7 @@ export function Marquee() {
             </span>
             <span className="font-display mx-2.5 text-sm text-ivory/85 sm:mx-3 sm:text-xl">{item}</span>
             {/* چراغ چشمک‌زن بین کلمات */}
-            <span className="lamp-dot mx-2.5 inline-block h-2 w-2 rounded-full bg-gold shadow-[0_0_8px_2px_rgba(201,162,39,0.6)] sm:mx-3" />
+            <span className="lamp-dot mx-2.5 inline-block h-2 w-2 rounded-full bg-gold shadow-[0_0_8px_2px_rgba(225,29,42,0.6)] sm:mx-3" />
           </span>
         ))}
       </div>

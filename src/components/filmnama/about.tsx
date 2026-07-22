@@ -63,21 +63,21 @@ export function About() {
           {/* Clapperboard card — narrower column */}
           <Reveal className="lg:col-span-5" delay={0.12}>
             <div className="overflow-hidden rounded-sm border border-divider shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
-              {/* Striped clapper top bar */}
+              {/* Striped clapper top bar — classic black/white film clapper */}
               <div className="relative h-14 overflow-hidden border-b-2 border-gold">
                 <div
                   className="absolute inset-0"
                   style={{
                     backgroundImage:
-                      "repeating-linear-gradient(120deg,#f4ede1 0 26px,#0e0c0b 26px 52px)",
+                      "repeating-linear-gradient(120deg,#f4f5f7 0 26px,#0e0c0b 26px 52px)",
                   }}
                 />
-                <div className="absolute inset-0 bg-noir/25" />
+                <div className="absolute inset-0 bg-ink/25" />
                 <div className="relative flex h-full items-center justify-between px-3">
-                  <span className="bg-noir/85 px-2 py-1 font-latin text-[11px] tracking-widest text-gold">
+                  <span className="bg-ink/85 px-2 py-1 font-latin text-[11px] tracking-widest text-gold">
                     FILMNAMA
                   </span>
-                  <span className="bg-noir/85 px-2 py-1 font-latin text-[11px] tracking-widest text-ivory">
+                  <span className="bg-ink/85 px-2 py-1 font-latin text-[11px] tracking-widest text-white">
                     SCENE 01 / TAKE 01
                   </span>
                 </div>

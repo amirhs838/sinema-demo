@@ -14,9 +14,9 @@ export function Hero() {
         className="absolute inset-0 h-full w-full object-cover"
         fetchPriority="high"
       />
-      {/* Legibility overlays — darker on the text side (right in RTL) */}
-      <div className="absolute inset-0 bg-gradient-to-l from-noir via-noir/75 to-noir/20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/10 to-noir/40" />
+      {/* Legibility overlays — dark scrim on the text side (hero stays a dark cinematic "screen") */}
+      <div className="absolute inset-0 bg-gradient-to-l from-ink via-ink/75 to-ink/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-ink/40" />
 
       {/* Top letterbox bar */}
       <div className="letterbox-bar relative z-10 h-7 sm:h-14" />
@@ -33,17 +33,17 @@ export function Hero() {
               </span>
             </div>
 
-            {/* Poster-style stacked title */}
+            {/* Poster-style stacked title — white text on the dark cinematic hero */}
             <h1 className="font-display font-extrabold leading-[0.98]">
-              <span className="block text-lg text-khaki sm:text-3xl">آموزشگاه آزاد</span>
+              <span className="block text-lg text-white/70 sm:text-3xl">آموزشگاه آزاد</span>
               <span className="mt-0.5 block bg-gradient-to-b from-gold-hover to-gold bg-clip-text text-5xl text-transparent sm:text-7xl lg:text-8xl">
                 سینمایی
               </span>
-              <span className="block text-5xl text-ivory sm:text-7xl lg:text-8xl">فیلم‌نما</span>
+              <span className="block text-5xl text-white sm:text-7xl lg:text-8xl">فیلم‌نما</span>
             </h1>
 
             {/* Tagline subtitle */}
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-khaki sm:mt-6 sm:max-w-xl sm:text-lg">
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/75 sm:mt-6 sm:max-w-xl sm:text-lg">
               {BRAND.tagline}
             </p>
 
@@ -52,7 +52,7 @@ export function Hero() {
               {/* Ticket CTA with perforated edge */}
               <a
                 href="#courses"
-                className="ticket group inline-flex items-stretch bg-gold text-noir shadow-[0_10px_40px_-12px_rgba(201,162,39,0.6)] transition-colors hover:bg-gold-hover"
+                className="ticket group inline-flex items-stretch bg-gold text-white shadow-[0_10px_40px_-12px_rgba(225,29,42,0.55)] transition-colors hover:bg-gold-hover"
               >
                 <span className="flex items-center gap-2 px-6 py-3.5 font-display text-base font-bold sm:px-7">
                   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
@@ -60,7 +60,7 @@ export function Hero() {
                   </svg>
                   مشاهده دوره‌ها
                 </span>
-                <span className="flex items-center border-s border-dashed border-noir/45 px-4 font-latin text-sm tracking-widest">
+                <span className="flex items-center border-s border-dashed border-white/45 px-4 font-latin text-sm tracking-widest">
                   SCENE&nbsp;01
                 </span>
               </a>
@@ -68,7 +68,7 @@ export function Hero() {
               {/* Secondary text CTA */}
               <a
                 href="#about"
-                className="group inline-flex items-center gap-2 text-sm text-ivory/80 transition-colors hover:text-gold sm:text-base"
+                className="group inline-flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-gold sm:text-base"
               >
                 <span>چرا فیلم‌نما؟</span>
                 <span className="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
@@ -81,7 +81,7 @@ export function Hero() {
       {/* Decorative vertical poster text on the far edge */}
       <div className="pointer-events-none absolute inset-y-0 end-5 z-10 hidden items-center lg:flex">
         <span
-          className="font-latin text-[11px] tracking-[0.4em] text-ivory/40"
+          className="font-latin text-[11px] tracking-[0.4em] text-white/40"
           style={{ writingMode: "vertical-rl" }}
         >
           ANAMORPHIC · 2.39:1 · 35MM

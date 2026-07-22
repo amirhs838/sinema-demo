@@ -89,7 +89,7 @@ export function Articles() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-noir-2 via-transparent to-transparent" />
-                    <span className="absolute start-3 top-3 bg-noir/85 px-2.5 py-1 font-latin text-[10px] tracking-widest text-gold">
+                    <span className="absolute start-3 top-3 bg-ink/85 px-2.5 py-1 font-latin text-[10px] tracking-widest text-gold">
                       {a.kicker.toUpperCase()}
                     </span>
                   </div>

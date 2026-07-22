@@ -48,7 +48,7 @@ function ClapperLogo({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-noir">
+    <footer className="mt-auto bg-noir-2">
       {/* Top: brand + links + contact */}
       <div className="border-b border-divider">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:gap-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:px-8">

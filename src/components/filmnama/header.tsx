@@ -51,7 +51,11 @@ export function Header() {
         <a href="#home" className="flex items-center gap-2.5" aria-label={`${BRAND.fullName}`}>
           <ClapperLogo className="h-9 w-9 shrink-0" />
           <span className="flex flex-col leading-none">
-            <span className="font-display text-xl font-extrabold text-ivory">
+            <span
+              className={`font-display text-xl font-extrabold transition-colors ${
+                scrolled ? "text-ivory" : "text-white"
+              }`}
+            >
               {BRAND.name}
             </span>
             <span className="font-latin mt-0.5 text-[10px] tracking-[0.3em] text-gold">
@@ -66,7 +70,11 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="relative px-3 py-2 text-sm text-khaki transition-colors hover:text-ivory"
+              className={`relative px-3 py-2 text-sm transition-colors ${
+                scrolled
+                  ? "text-khaki hover:text-ivory"
+                  : "text-white/75 hover:text-white"
+              }`}
             >
               {item.label}
             </a>
@@ -76,7 +84,7 @@ export function Header() {
         {/* Desktop CTA */}
         <a
           href="#contact"
-          className="hidden bg-gold px-5 py-2 font-display text-sm font-bold text-noir shadow-[0_0_18px_-4px_rgba(201,162,39,0.7)] transition-colors hover:bg-gold-hover lg:inline-block"
+          className="hidden bg-gold px-5 py-2 font-display text-sm font-bold text-white shadow-[0_0_18px_-4px_rgba(225,29,42,0.6)] transition-colors hover:bg-gold-hover lg:inline-block"
         >
           ثبت‌نام
         </a>
@@ -86,7 +94,9 @@ export function Header() {
           <SheetTrigger
             asChild
             aria-label="باز کردن منو"
-            className="inline-flex h-10 w-10 items-center justify-center text-ivory lg:hidden"
+            className={`inline-flex h-10 w-10 items-center justify-center transition-colors lg:hidden ${
+              scrolled ? "text-ivory" : "text-white"
+            }`}
           >
             <button type="button">
               <Menu className="h-6 w-6" />

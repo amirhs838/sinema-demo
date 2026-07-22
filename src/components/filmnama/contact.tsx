@@ -126,7 +126,7 @@ export function Contact() {
               <span className="font-latin text-[11px] tracking-[0.25em] text-gold sm:text-sm">
                 BOX OFFICE · ثبت‌نام سریع
               </span>
-              <span className="lamp-dot inline-block h-2 w-2 rounded-full bg-gold shadow-[0_0_8px_2px_rgba(201,162,39,0.6)]" />
+              <span className="lamp-dot inline-block h-2 w-2 rounded-full bg-gold shadow-[0_0_8px_2px_rgba(225,29,42,0.6)]" />
             </div>
             <div className="grid items-center gap-5 p-4 sm:gap-6 sm:p-6 md:grid-cols-2">
               <div>
