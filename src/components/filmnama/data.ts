@@ -274,13 +274,8 @@ export const ARTICLES: Article[] = [
   },
 ];
 
-// مارکی زیر هیرو — هفت رشته
-export const MARQUEE_ITEMS = [
-  "بازیگری",
-  "کارگردانی",
-  "فیلمنامه‌نویسی",
-  "عکاسی سینمایی",
-  "گریم سینمایی",
-  "تدوین",
-  "فن بیان و گویندگی",
+// مارکی زیر هیرو — همهٔ دوره‌های سینما + همهٔ دپارتمان‌ها (پشت‌سرهم، لوپ)
+export const MARQUEE_ITEMS: { fa: string; en: string }[] = [
+  ...COURSES.map((c) => ({ fa: c.fa, en: c.en })),
+  ...DEPARTMENTS.map((d) => ({ fa: d.fa, en: d.en })),
 ];
