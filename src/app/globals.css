@@ -346,10 +346,20 @@ button:focus-visible {
   display: flex;
   width: max-content;
   white-space: nowrap;
+  gap: 0.5rem; /* tight uniform gap between items */
   animation: marquee-scroll 40s linear infinite;
 }
 .marquee-track > * {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+/* tiny inline bullet separator after each item (no extra box/margin) */
+.marquee-item::after {
+  content: "·";
+  margin-inline-start: 0.5rem;
+  color: var(--color-gold);
+  font-weight: 700;
 }
 .marquee-mask:hover .marquee-track {
   animation-play-state: paused;

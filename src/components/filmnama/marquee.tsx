@@ -1,6 +1,6 @@
 import { MARQUEE_ITEMS } from "./data";
 
-// نوار مارکی زیر هیرو — همهٔ دوره‌ها + دپارتمان‌ها، پشت‌سرهم، لوپ بی‌وقفه
+// نوار مارکی زیر هیرو — همهٔ دوره‌ها + دپارتمان‌ها، پشت‌سرهم، لوپ بی‌وقفه، بدون گپ
 export function Marquee() {
   // Duplicate the full set so the -50% translate loop is seamless
   const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
@@ -12,16 +12,13 @@ export function Marquee() {
     >
       <div className="marquee-track" dir="ltr">
         {items.map((item, i) => (
-          <span key={i} className="inline-flex items-center">
-            {/* Latin label + Persian label together */}
+          <span key={i} className="marquee-item">
             <span className="font-latin text-base tracking-wide text-gold sm:text-2xl">
               {item.en}
             </span>
             <span className="font-display ms-1.5 text-sm text-ivory/85 sm:ms-2 sm:text-xl">
               {item.fa}
             </span>
-            {/* چراغ چشمک‌زن بین آیتم‌ها — فقط یک نقطهٔ کوچک */}
-            <span className="lamp-dot ms-3 inline-block h-1.5 w-1.5 rounded-full bg-gold sm:ms-4" />
           </span>
         ))}
       </div>
