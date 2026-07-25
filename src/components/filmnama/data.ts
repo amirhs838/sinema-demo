@@ -20,12 +20,79 @@ export const BRAND = {
 
 export const NAV = [
   { label: "صفحه اصلی", href: "#home" },
-  { label: "دوره‌ها", href: "#courses" },
+  { label: "دپارتمان‌ها", href: "#departments" },
   { label: "اساتید", href: "#teachers" },
   { label: "گالری", href: "#screening" },
   { label: "مقالات", href: "#articles" },
   { label: "درباره ما", href: "#about" },
   { label: "تماس با ما", href: "#contact" },
+];
+
+export type Department = {
+  fa: string;
+  en: string;
+  code: string; // department code label (Latin)
+  desc: string;
+  href: string;
+  badge?: string; // small gold badge text
+  pageReady?: boolean;
+};
+
+// هفت دپارتمان آکادمی فیلم‌نما.
+// دپارتمان ۱ (هنرهای نمایشی) آمادهٔ نمایش است؛ دپارتمان‌های ۲ تا ۷ صرفاً پیش‌نویس‌اند
+// و بعداً با محتوای واقعی جایگزین می‌شوند.
+export const DEPARTMENTS: Department[] = [
+  {
+    fa: "هنرهای نمایشی",
+    en: "PERFORMING ARTS",
+    code: "DEPT 01",
+    desc: "بازیگری، کارگردانی، فیلمنامه‌نویسی، عکاسی سینمایی، گریم، تدوین و فن بیان؛ هفت زیررشته در دل یک کارگاه واقعی سینما.",
+    href: "#courses",
+    pageReady: true,
+  },
+  {
+    fa: "موسیقی",
+    en: "MUSIC",
+    code: "DEPT 02",
+    desc: "آموزش حضوری نوازندگی و تئوری موسیقی، از پایه تا اجرای صحنه‌ای.",
+    href: "#contact",
+  },
+  {
+    fa: "گردشگری",
+    en: "TOURISM",
+    code: "DEPT 03",
+    desc: "راهنمای تور و صنعت گردشگری؛ دوره‌ای که با مدرک رسمی به پایان می‌رسد.",
+    href: "#contact",
+    badge: "مدرک آموزش‌وپرورش",
+  },
+  {
+    fa: "برنامه‌نویسی",
+    en: "PROGRAMMING",
+    code: "DEPT 04",
+    desc: "برنامه‌نویسی وب و نرم‌افزار، از مبانی تا ساخت اولین پروژهٔ واقعی.",
+    href: "#contact",
+  },
+  {
+    fa: "زبان",
+    en: "LANGUAGE",
+    code: "DEPT 05",
+    desc: "دوره‌های زبان خارجی با رویکرد مکالمه‌محور و کاربردی.",
+    href: "#contact",
+  },
+  {
+    fa: "IT",
+    en: "INFORMATION TECHNOLOGY",
+    code: "DEPT 06",
+    desc: "مهارت‌های فناوری اطلاعات و شبکه، متناسب با نیاز بازار کار امروز.",
+    href: "#contact",
+  },
+  {
+    fa: "حسابداری",
+    en: "ACCOUNTING",
+    code: "DEPT 07",
+    desc: "حسابداری مالی و کار با نرم‌افزارهای حسابداری، آماده برای ورود به بازار کار.",
+    href: "#contact",
+  },
 ];
 
 export type Course = {

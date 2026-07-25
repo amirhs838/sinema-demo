@@ -38,7 +38,7 @@ export function Screening() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <Reveal className="mb-10 max-w-2xl sm:mb-12">
-          <span className="font-latin text-xs tracking-[0.35em] text-gold">SCREENING ROOM · اتاق نمایش</span>
+          <span className="font-latin text-xs tracking-[0.35em] text-gold">PATH 02 · SCREENING ROOM</span>
           <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
             آثارِ هنرجویان روی پرده
           </h2>

@@ -2,7 +2,9 @@ import { FilmGrain } from "@/components/filmnama/grain";
 import { Header } from "@/components/filmnama/header";
 import { Hero } from "@/components/filmnama/hero";
 import { Marquee } from "@/components/filmnama/marquee";
+import { Paths } from "@/components/filmnama/paths";
 import { About } from "@/components/filmnama/about";
+import { Departments } from "@/components/filmnama/departments";
 import { Courses } from "@/components/filmnama/courses";
 import { Teachers } from "@/components/filmnama/teachers";
 import { Screening } from "@/components/filmnama/screening";
@@ -29,23 +31,27 @@ export default function Home() {
         <Hero />
         {/* ۳. نوار مارکی — چراغ‌های تابلوی سینما */}
         <Marquee />
-        {/* ۴. چرا فیلم‌نما (درباره) + تخته کلاکت */}
+        {/* ۴. دو مسیر، یک فیلم‌نما (آکادمی + کارگاه تولید) */}
+        <Paths />
+        {/* ۵. چرا فیلم‌نما (درباره) + تخته کلاکت */}
         <About />
-        {/* ۵. دوره‌های آموزشی — کارت‌های فریم ۳۵mm */}
+        {/* ۶. دپارتمان‌های آکادمی — هفت کارت با آیکون */}
+        <Departments />
+        {/* ۷. دپارتمان هنرهای نمایشی — کارت‌های فریم ۳۵mm */}
         <Courses />
-        {/* ۶. اساتید — تیتراژ فیلم */}
+        {/* ۸. اساتید — تیتراژ فیلم */}
         <Teachers />
-        {/* ۷. اتاق نمایش / آثار هنرجویان */}
+        {/* ۹. کارگاه تولید / اتاق نمایش / آثار هنرجویان */}
         <Screening />
-        {/* ۸. مقالات — مجلهٔ سینمایی */}
+        {/* ۱۰. مقالات — مجلهٔ سینمایی */}
         <Articles />
-        {/* ۹. نظرات هنرجویان — قاب‌های آماده + دعوت به اینستاگرام */}
+        {/* ۱۱. نظرات هنرجویان */}
         <Testimonials />
-        {/* ۱۰. ثبت‌نام / تماس (باجهٔ بلیت‌فروشی) */}
+        {/* ۱۲. ثبت‌نام / تماس (باجهٔ بلیت‌فروشی) */}
         <Contact />
       </main>
 
-      {/* ۱۱. فوتر — تیتراژ پایان فیلم (THE END / پایان) */}
+      {/* ۱۳. فوتر — تیتراژ پایان فیلم (THE END / پایان) */}
       <Footer />
     </div>
   );

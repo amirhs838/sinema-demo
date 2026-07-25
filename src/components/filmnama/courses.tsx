@@ -22,7 +22,7 @@ export function Courses() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <Reveal className="mb-10 max-w-2xl sm:mb-12">
-          <span className="font-latin text-xs tracking-[0.35em] text-gold">COURSES · دوره‌ها</span>
+          <span className="font-latin text-xs tracking-[0.35em] text-gold">DEPT 01 · دپارتمان هنرهای نمایشی</span>
           <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
             هفت رشته، یک کارگاه
           </h2>
