@@ -75,16 +75,16 @@ export function Hero() {
               {BRAND.tagline}
             </p>
 
-            {/* CTAs — Primary (solid red) + Secondary (outline) */}
-            <div className="mt-7 flex flex-col items-start gap-4 sm:mt-9 sm:flex-row sm:items-center sm:gap-5">
-              <a href="#courses" className="btn-primary text-sm sm:text-base">
+            {/* CTAs — on mobile: "چرا فیلم‌نما؟" first, then "مشاهده دوره‌ها"; on desktop: reversed */}
+            <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:items-center sm:gap-5">
+              <a href="#about" className="btn-secondary order-1 text-sm sm:order-2 sm:text-base">
+                چرا فیلم‌نما؟
+              </a>
+              <a href="#courses" className="btn-primary order-2 text-sm sm:order-1 sm:text-base">
                 مشاهده دوره‌ها
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
                   <path d="M8 5v14l11-7z" />
                 </svg>
-              </a>
-              <a href="#about" className="btn-secondary text-sm sm:text-base">
-                چرا فیلم‌نما؟
               </a>
             </div>
           </Reveal>

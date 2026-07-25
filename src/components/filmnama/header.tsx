@@ -82,10 +82,10 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
+        {/* CTA — visible on all sizes; compact on mobile */}
         <a
           href="#contact"
-          className="btn-primary hidden text-sm lg:inline-flex"
+          className="btn-primary text-xs px-3.5 py-2 lg:text-sm lg:px-7 lg:py-3.5"
         >
           ثبت‌نام
         </a>

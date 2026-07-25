@@ -1,7 +1,8 @@
 import { Reveal } from "./reveal";
 
 // ============================================================
-// ۳. نوار آماری — اعداد فارسی + لیبل uppercase + جداکنندهٔ عمودی
+// ۳. نوار آماری — اعداد فارسی + لیبل uppercase + جداکنندهٔ داخلی
+//    موبایل: گرید ۲×۲ با بوردر داخلی؛ دسکتاپ: یک ردیف ۴ ستونه
 // ============================================================
 
 const STATS: { num: string; label: string }[] = [
@@ -19,25 +20,34 @@ export function Stats() {
       className="border-b border-divider bg-noir-2"
     >
       <Reveal>
-        <div className="mx-auto flex max-w-7xl flex-wrap items-stretch justify-center px-4 sm:px-6 lg:px-8">
-          {STATS.map((s, i) => (
-            <div
-              key={s.label}
-              className={`flex min-w-[44%] flex-1 flex-col items-center justify-center px-4 py-7 text-center sm:min-w-[22%] sm:py-9 ${
-                i !== 0 ? "border-s border-divider sm:border-s" : ""
-              }`}
-            >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* 2×2 grid on mobile, single row of 4 on desktop */}
+          <div className="grid grid-cols-2 divide-divider sm:flex sm:items-stretch sm:justify-center">
+            {STATS.map((s, i) => (
               <div
-                className="font-display font-extrabold text-gold"
-                style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}
+                key={s.label}
+                className={[
+                  // mobile: internal borders for the 2×2 grid
+                  "flex flex-col items-center justify-center px-3 py-6 text-center sm:px-6 sm:py-9",
+                  // mobile grid borders (rows/cols)
+                  i % 2 === 1 ? "border-s border-divider" : "",
+                  i >= 2 ? "border-t border-divider sm:border-t-0" : "",
+                  // desktop: only start border (skip first)
+                  i !== 0 ? "sm:border-s sm:border-t-0" : "",
+                ].join(" ")}
               >
-                {s.num}
+                <div
+                  className="font-display font-extrabold text-gold"
+                  style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1 }}
+                >
+                  {s.num}
+                </div>
+                <div className="mt-1.5 text-[10px] leading-tight text-khaki sm:mt-2 sm:text-[11px]">
+                  {s.label}
+                </div>
               </div>
-              <div className="font-latin mt-2 text-[10px] tracking-[0.2em] text-khaki sm:text-[11px]">
-                {s.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Reveal>
     </section>
