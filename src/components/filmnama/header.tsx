@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 import { BRAND, NAV } from "./data";
 import {
@@ -11,19 +12,19 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-// Clapperboard mark — custom brand icon in RED (no stock icon pack)
-function ClapperLogo({ className }: { className?: string }) {
+// Filmnama brand logo (uploaded calligraphic mark, recolored red, transparent bg)
+// Source 857×1698 (aspect ~1:2). Rendered at a fixed height, width auto.
+function FilmnamaLogo({ height = 40 }: { height?: number }) {
   return (
-    <svg viewBox="0 0 48 48" className={className} fill="none" aria-hidden="true">
-      <rect x="5" y="22" width="38" height="20" rx="1.5" fill="#0b0b0c" stroke="#e11d2a" strokeWidth="1.6" />
-      <rect x="5" y="18" width="38" height="6" fill="#0b0b0c" stroke="#e11d2a" strokeWidth="1.6" />
-      <g transform="rotate(-7 24 16)">
-        <rect x="6" y="9" width="36" height="9" fill="#0b0b0c" stroke="#e11d2a" strokeWidth="1.6" />
-        <polygon points="9,9 15,9 12,18 6,18" fill="#f5f5f4" />
-        <polygon points="21,9 27,9 24,18 18,18" fill="#f5f5f4" />
-        <polygon points="33,9 39,9 36,18 30,18" fill="#f5f5f4" />
-      </g>
-    </svg>
+    <Image
+      src="/images/logo-filmnama.png"
+      alt="لوگوی فیلم‌نما"
+      width={Math.round(height * (857 / 1698))}
+      height={height}
+      priority
+      className="shrink-0"
+      style={{ height: `${height}px`, width: "auto" }}
+    />
   );
 }
 
@@ -49,7 +50,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo / wordmark */}
         <a href="#home" className="flex items-center gap-2.5" aria-label={`${BRAND.fullName}`}>
-          <ClapperLogo className="h-9 w-9 shrink-0" />
+          <FilmnamaLogo height={40} />
           <span className="flex flex-col leading-none">
             <span
               className={`font-display text-xl font-extrabold transition-colors ${
@@ -108,7 +109,7 @@ export function Header() {
           >
             <SheetHeader className="border-b border-divider px-5 py-4 text-start">
               <SheetTitle className="flex items-center gap-2 text-ivory">
-                <ClapperLogo className="h-8 w-8" />
+                <FilmnamaLogo height={32} />
                 <span className="font-display text-lg font-extrabold">{BRAND.name}</span>
               </SheetTitle>
             </SheetHeader>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BRAND, NAV } from "./data";
 
 // ============================================================
@@ -31,18 +32,17 @@ function SocialUssd({ className }: { className?: string }) {
   );
 }
 
-function ClapperLogo({ className }: { className?: string }) {
+function ClapperLogo({ height = 40 }: { height?: number }) {
   return (
-    <svg viewBox="0 0 48 48" className={className} fill="none" aria-hidden="true">
-      <rect x="5" y="22" width="38" height="20" rx="1.5" fill="#0b0b0c" stroke="#e11d2a" strokeWidth="1.6" />
-      <rect x="5" y="18" width="38" height="6" fill="#0b0b0c" stroke="#e11d2a" strokeWidth="1.6" />
-      <g transform="rotate(-7 24 16)">
-        <rect x="6" y="9" width="36" height="9" fill="#0b0b0c" stroke="#e11d2a" strokeWidth="1.6" />
-        <polygon points="9,9 15,9 12,18 6,18" fill="#f5f5f4" />
-        <polygon points="21,9 27,9 24,18 18,18" fill="#f5f5f4" />
-        <polygon points="33,9 39,9 36,18 30,18" fill="#f5f5f4" />
-      </g>
-    </svg>
+    <Image
+      src="/images/logo-filmnama.png"
+      alt="لوگوی فیلم‌نما"
+      width={Math.round(height * (857 / 1698))}
+      height={height}
+      priority
+      className="shrink-0"
+      style={{ height: `${height}px`, width: "auto" }}
+    />
   );
 }
 
@@ -55,7 +55,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-5">
             <div className="flex items-center gap-2.5">
-              <ClapperLogo className="h-10 w-10" />
+              <ClapperLogo height={48} />
               <div className="flex flex-col leading-none">
                 <span className="font-display text-2xl font-extrabold text-ivory">{BRAND.name}</span>
                 <span className="font-latin mt-1 text-[10px] tracking-[0.3em] text-gold">
