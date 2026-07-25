@@ -84,7 +84,7 @@ export function Header() {
         {/* Desktop CTA */}
         <a
           href="#contact"
-          className="hidden bg-gold px-5 py-2 font-display text-sm font-bold text-white shadow-[0_0_18px_-4px_rgba(225,29,42,0.6)] transition-colors hover:bg-gold-hover lg:inline-block"
+          className="btn-primary hidden text-sm lg:inline-flex"
         >
           ثبت‌نام
         </a>
@@ -126,7 +126,7 @@ export function Header() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="mt-4 bg-gold px-4 py-3 text-center font-display font-bold text-noir transition-colors hover:bg-gold-hover"
+                className="btn-primary mt-4 w-full justify-center"
               >
                 ثبت‌نام
               </a>

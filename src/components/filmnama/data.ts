@@ -20,7 +20,7 @@ export const BRAND = {
 
 export const NAV = [
   { label: "صفحه اصلی", href: "#home" },
-  { label: "دپارتمان‌ها", href: "#departments" },
+  { label: "دوره‌ها", href: "#courses" },
   { label: "اساتید", href: "#teachers" },
   { label: "گالری", href: "#screening" },
   { label: "مقالات", href: "#articles" },
@@ -34,6 +34,7 @@ export type Department = {
   code: string; // department code label (Latin)
   desc: string;
   href: string;
+  icon: string; // lucide icon name
   badge?: string; // small gold badge text
   pageReady?: boolean;
 };
@@ -48,6 +49,7 @@ export const DEPARTMENTS: Department[] = [
     code: "DEPT 01",
     desc: "بازیگری، کارگردانی، فیلمنامه‌نویسی، عکاسی سینمایی، گریم، تدوین و فن بیان؛ هفت زیررشته در دل یک کارگاه واقعی سینما.",
     href: "#courses",
+    icon: "Clapperboard",
     pageReady: true,
   },
   {
@@ -56,6 +58,7 @@ export const DEPARTMENTS: Department[] = [
     code: "DEPT 02",
     desc: "آموزش حضوری نوازندگی و تئوری موسیقی، از پایه تا اجرای صحنه‌ای.",
     href: "#contact",
+    icon: "Music",
   },
   {
     fa: "گردشگری",
@@ -64,6 +67,7 @@ export const DEPARTMENTS: Department[] = [
     desc: "راهنمای تور و صنعت گردشگری؛ دوره‌ای که با مدرک رسمی به پایان می‌رسد.",
     href: "#contact",
     badge: "مدرک آموزش‌وپرورش",
+    icon: "Compass",
   },
   {
     fa: "برنامه‌نویسی",
@@ -71,6 +75,7 @@ export const DEPARTMENTS: Department[] = [
     code: "DEPT 04",
     desc: "برنامه‌نویسی وب و نرم‌افزار، از مبانی تا ساخت اولین پروژهٔ واقعی.",
     href: "#contact",
+    icon: "Code2",
   },
   {
     fa: "زبان",
@@ -78,6 +83,7 @@ export const DEPARTMENTS: Department[] = [
     code: "DEPT 05",
     desc: "دوره‌های زبان خارجی با رویکرد مکالمه‌محور و کاربردی.",
     href: "#contact",
+    icon: "Languages",
   },
   {
     fa: "IT",
@@ -85,6 +91,7 @@ export const DEPARTMENTS: Department[] = [
     code: "DEPT 06",
     desc: "مهارت‌های فناوری اطلاعات و شبکه، متناسب با نیاز بازار کار امروز.",
     href: "#contact",
+    icon: "Cpu",
   },
   {
     fa: "حسابداری",
@@ -92,6 +99,7 @@ export const DEPARTMENTS: Department[] = [
     code: "DEPT 07",
     desc: "حسابداری مالی و کار با نرم‌افزارهای حسابداری، آماده برای ورود به بازار کار.",
     href: "#contact",
+    icon: "Calculator",
   },
 ];
 
@@ -100,6 +108,7 @@ export type Course = {
   en: string;
   scene: string; // scene number label (Latin)
   desc: string;
+  icon: string; // lucide icon name
   comingSoon?: boolean;
 };
 
@@ -110,12 +119,14 @@ export const COURSES: Course[] = [
     en: "ACTING",
     scene: "SCENE 01",
     desc: "بازیگری مقابل دوربین و تئاتر؛ از تکنیک‌های شخصیت‌پردازی تا کار صحنه.",
+    icon: "Drama",
   },
   {
     fa: "کارگردانی",
     en: "DIRECTING",
     scene: "SCENE 02",
     desc: "زبان تصویر، مدیریت صحنه و هدایت بازیگر؛ از ایده تا قاب نهایی.",
+    icon: "Clapperboard",
     comingSoon: true,
   },
   {
@@ -123,18 +134,21 @@ export const COURSES: Course[] = [
     en: "SCREENWRITING",
     scene: "SCENE 03",
     desc: "ساختار دراماتیک، شخصیت‌پردازی و دیالوگ‌نویسی برای سینما.",
+    icon: "PenLine",
   },
   {
     fa: "عکاسی سینمایی",
     en: "CINEMATOGRAPHY",
     scene: "SCENE 04",
     desc: "نور، کادربندی و حرکت دوربین؛ روایت با نور و سایه.",
+    icon: "Camera",
   },
   {
     fa: "گریم سینمایی",
     en: "MAKE-UP",
     scene: "SCENE 05",
     desc: "گریم سنتی و افکت‌محور برای شخصیت‌پردازی روی پردهٔ سینما.",
+    icon: "Brush",
     comingSoon: true,
   },
   {
@@ -142,12 +156,14 @@ export const COURSES: Course[] = [
     en: "EDITING",
     scene: "SCENE 06",
     desc: "ریتم، روایت و قواعد کات؛ از خام‌برش تا نسخهٔ نهایی.",
+    icon: "Scissors",
   },
   {
     fa: "فن بیان و گویندگی",
     en: "VOICE & DUBBING",
     scene: "SCENE 07",
     desc: "تکنیک‌های تنفس، بیان و گویندگی حرفه‌ای برای صحنه و میکروفون.",
+    icon: "Mic",
   },
 ];
 

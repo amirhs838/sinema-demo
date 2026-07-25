@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { WORKS, BRAND } from "./data";
 import { Reveal } from "./reveal";
 
@@ -26,12 +27,13 @@ export function Screening() {
       className="relative overflow-hidden border-b border-divider bg-noir py-14 sm:py-28"
     >
       {/* Cinema-seats backdrop (subtle texture on black) */}
-      <img
+      <Image
         src="/images/screening-seats.png"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover opacity-[0.12]"
-        loading="lazy"
+        fill
+        sizes="100vw"
+        className="object-cover opacity-[0.12]"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-noir via-noir/80 to-noir" />
 
@@ -56,15 +58,16 @@ export function Screening() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`مشاهدهٔ فیلم ${w.title} در اینستاگرام فیلم‌نما`}
-                className="group block overflow-hidden rounded-sm border border-divider bg-noir-2 transition-colors hover:border-gold/60"
+                className="group block overflow-hidden rounded-sm border border-divider bg-surface transition-colors hover:border-gold/60"
               >
                 {/* Thumbnail */}
                 <div className="relative aspect-video overflow-hidden">
-                  <img
+                  <Image
                     src="/images/screening-seats.png"
                     alt={`پوستهٔ فیلم کوتاه ${w.title}`}
-                    className="h-full w-full object-cover opacity-50 transition-opacity duration-500 group-hover:opacity-70"
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover opacity-50 transition-opacity duration-500 group-hover:opacity-70"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
 

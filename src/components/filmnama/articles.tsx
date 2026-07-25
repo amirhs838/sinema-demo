@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ARTICLES, BRAND } from "./data";
 import { Reveal } from "./reveal";
 
@@ -45,7 +46,7 @@ export function Articles() {
                     href={BRAND.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="spotlight group flex h-full flex-col justify-between overflow-hidden rounded-sm border border-divider bg-noir p-6 transition-colors hover:border-gold/60"
+                    className="spotlight group flex h-full flex-col justify-between overflow-hidden rounded-sm border border-divider bg-surface p-6 transition-colors hover:border-gold/60"
                   >
                     <div>
                       <span className="font-latin text-[11px] tracking-[0.3em] text-gold">
@@ -78,17 +79,18 @@ export function Articles() {
                   href={BRAND.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-noir-2 transition-colors hover:border-gold/60"
+                  className="group flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-surface transition-colors hover:border-gold/60"
                 >
                   {/* Image */}
                   <div className="relative aspect-[16/10] overflow-hidden sm:aspect-[16/10]">
-                    <img
+                    <Image
                       src={img}
                       alt={a.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-noir-2 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent" />
                     <span className="absolute start-3 top-3 bg-ink/85 px-2.5 py-1 font-latin text-[10px] tracking-widest text-gold">
                       {a.kicker.toUpperCase()}
                     </span>

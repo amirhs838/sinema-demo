@@ -5,22 +5,26 @@
 
 /* ============================================================
    فیلم‌نما · Brand Design System
-   Warm-noir cinema palette + Persian typography
+   Stepped dark palette (black/dark-gray) + white text + red accent
    ============================================================ */
 
 @theme {
-  /* Brand color palette — Black · Red · White (pure black cinema theme)
-     Dark site on true black; red accent + white text. Cinematic and bold. */
-  --color-noir: #000000;        /* main background → pure black */
-  --color-noir-2: #0a0a0c;      /* panels / cards → near-black (slight lift) */
-  --color-ivory: #ffffff;       /* main text → pure white */
-  --color-khaki: #9ca3af;       /* helper text → cool gray */
-  --color-gold: #e11d2a;        /* primary accent → cinematic red */
-  --color-gold-hover: #f52535;  /* accent hover → bright red */
-  --color-crimson: #7f1d1d;     /* secondary accent → dark red (tags) */
-  --color-cine-green: #1f2937;  /* neutral dark slate (success/copy state) */
-  --color-divider: #1f2024;     /* borders → subtle dark gray on black */
-  --color-ink: #000000;         /* deep black for the dark hero/photo zones */
+  /* Brand color palette — stepped dark grays + white + red accent.
+     Each depth level is one perceptible step lighter than the previous. */
+  --color-noir: #0b0b0c;              /* bg-base (page) */
+  --color-noir-2: #121214;            /* bg-elevated (alternating sections) */
+  --color-surface: #1a1a1d;           /* cards */
+  --color-surface-hover: #232326;     /* card hover */
+  --color-surface-secondary: #161618; /* minor-department cards (slightly muted) */
+  --color-ivory: #f5f5f4;             /* text-primary (not pure white) */
+  --color-khaki: #a1a1a6;             /* text-secondary */
+  --color-muted: #6b6b70;             /* text-muted */
+  --color-gold: #e11d2a;              /* accent-red (brand red) */
+  --color-gold-hover: #ff2e40;        /* accent-red hover */
+  --color-crimson: #7f1d1d;           /* dark red (tags / second accent) */
+  --color-cine-green: #1f2937;        /* neutral slate (copy-success state) */
+  --color-divider: #2a2a2e;           /* border-subtle */
+  --color-ink: #0b0b0c;               /* deep bg for hero/photo overlays */
 
   /* Typography */
   --font-display: "Estedad", "Yekan Bakh", system-ui, sans-serif;
@@ -28,7 +32,7 @@
   --font-latin: "Bebas Neue", "Impact", sans-serif;
 }
 
-/* shadcn semantic tokens → mapped onto the noir brand theme */
+/* shadcn semantic tokens → mapped onto the stepped dark theme */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -69,39 +73,49 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Default theme = pure black / red / white cinema theme */
+/* Default theme = stepped dark / red / white cinema theme */
 :root {
   --radius: 0.5rem;
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #0a0a0c;
-  --card-foreground: #ffffff;
-  --popover: #0a0a0c;
-  --popover-foreground: #ffffff;
+
+  /* Type scale (fluid) */
+  --fs-display: clamp(2.25rem, 5vw + 1rem, 4.5rem);
+  --fs-h2: clamp(1.5rem, 2.5vw + 0.5rem, 2.5rem);
+  --fs-h3: clamp(1.125rem, 1.2vw + 0.8rem, 1.375rem);
+  --fs-body: 1rem;
+  --fs-small: 0.8125rem;
+  --lh-body: 1.75;
+  --lh-heading: 1.3;
+
+  --background: #0b0b0c;
+  --foreground: #f5f5f4;
+  --card: #1a1a1d;
+  --card-foreground: #f5f5f4;
+  --popover: #1a1a1d;
+  --popover-foreground: #f5f5f4;
   --primary: #e11d2a;
-  --primary-foreground: #ffffff;
-  --secondary: #0a0a0c;
-  --secondary-foreground: #ffffff;
-  --muted: #0a0a0c;
-  --muted-foreground: #9ca3af;
+  --primary-foreground: #f5f5f4;
+  --secondary: #121214;
+  --secondary-foreground: #f5f5f4;
+  --muted: #121214;
+  --muted-foreground: #a1a1a6;
   --accent: #7f1d1d;
-  --accent-foreground: #ffffff;
+  --accent-foreground: #f5f5f4;
   --destructive: #b91c1c;
-  --border: #1f2024;
-  --input: #1f2024;
+  --border: #2a2a2e;
+  --input: #2a2a2e;
   --ring: #e11d2a;
   --chart-1: #e11d2a;
   --chart-2: #7f1d1d;
-  --chart-3: #9ca3af;
-  --chart-4: #ffffff;
-  --chart-5: #0a0a0c;
-  --sidebar: #0a0a0c;
-  --sidebar-foreground: #ffffff;
+  --chart-3: #a1a1a6;
+  --chart-4: #f5f5f4;
+  --chart-5: #1a1a1d;
+  --sidebar: #121214;
+  --sidebar-foreground: #f5f5f4;
   --sidebar-primary: #e11d2a;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary-foreground: #f5f5f4;
   --sidebar-accent: #7f1d1d;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #1f2024;
+  --sidebar-accent-foreground: #f5f5f4;
+  --sidebar-border: #2a2a2e;
   --sidebar-ring: #e11d2a;
 }
 
@@ -117,14 +131,18 @@
     background-color: var(--color-noir);
     color: var(--color-ivory);
     font-family: var(--font-body);
+    /* Ensure Persian digit shapes render consistently everywhere */
+    font-feature-settings: "ss01";
+    font-variant-numeric: lining-nums;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    line-height: var(--lh-body);
     /* Respect iOS safe area insets at the bottom (home indicator) */
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   ::selection {
     background: var(--color-gold);
-    color: var(--color-noir);
+    color: #fff;
   }
   /* Cinematic custom scrollbar */
   ::-webkit-scrollbar {
@@ -146,12 +164,12 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 800;
-    line-height: 1.15;
+    line-height: var(--lh-heading);
   }
 }
 
 /* ============================================================
-   Utility classes — cinema micro-interactions
+   Utility classes — cinema micro-interactions + design system
    ============================================================ */
 
 /* Latin accent font (numbers, EN labels) */
@@ -160,7 +178,12 @@
   letter-spacing: 0.04em;
 }
 
-/* Thin gold rule under section titles */
+/* Fluid heading helpers (use via inline style or class on h1/h2/h3) */
+.fs-display { font-size: var(--fs-display); }
+.fs-h2 { font-size: var(--fs-h2); }
+.fs-h3 { font-size: var(--fs-h3); }
+
+/* Thin red rule under section titles */
 .title-rule {
   position: relative;
 }
@@ -170,27 +193,136 @@
   width: 56px;
   height: 2px;
   margin-top: 14px;
-  background: linear-gradient(
-    90deg,
-    var(--color-gold),
-    transparent
-  );
+  background: linear-gradient(90deg, var(--color-gold), transparent);
 }
 [dir="rtl"] .title-rule::after {
-  background: linear-gradient(
-    270deg,
-    var(--color-gold),
-    transparent
-  );
+  background: linear-gradient(270deg, var(--color-gold), transparent);
 }
 
-/* ---- Film grain overlay (screen blend so it shows on pure black) ---- */
+/* ---- Button system (3 levels) ---- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-gold);
+  color: #fff;
+  border-radius: 8px;
+  padding: 14px 28px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.btn-primary:hover { background: var(--color-gold-hover); }
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: var(--color-ivory);
+  border-radius: 8px;
+  padding: 14px 28px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.4); }
+
+.btn-tertiary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  transition: gap 0.2s ease;
+}
+.btn-tertiary:hover { gap: 0.65rem; }
+.btn-tertiary .btn-tertiary-label { position: relative; }
+.btn-tertiary .btn-tertiary-label::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: inline-start;
+  transition: transform 0.25s ease;
+}
+.btn-tertiary:hover .btn-tertiary-label::after { transform: scaleX(1); }
+
+/* Visible focus ring for all interactive elements */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-tertiary:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---- Spotlight cursor (hero, desktop only) ---- */
+.hero-spotlight {
+  position: relative;
+}
+.hero-spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    300px circle at var(--x, 50%) var(--y, 50%),
+    rgba(225, 29, 42, 0.12),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.hero-spotlight:hover::before { opacity: 1; }
+/* Disable on touch / no-hover devices */
+@media (hover: none), (pointer: coarse) {
+  .hero-spotlight::before { display: none; }
+}
+
+/* ---- Teacher photo: unified B&W + red multiply treatment ---- */
+.teacher-photo {
+  position: relative;
+  overflow: hidden;
+}
+.teacher-photo img {
+  filter: grayscale(100%) contrast(1.1) brightness(0.95);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+.teacher-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(15, 15, 17, 0.4), rgba(225, 29, 46, 0.22));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.teacher-photo:hover img {
+  filter: grayscale(60%) contrast(1.08) brightness(1);
+}
+
+/* ---- Testimonial avatar (radial gradient + film-reel behind) ---- */
+.voice-avatar {
+  position: relative;
+  background: radial-gradient(circle at 30% 30%, var(--color-surface-hover), var(--color-surface));
+  overflow: hidden;
+}
+
+/* ---- Film grain overlay (light, screen blend for dark bg) ---- */
 .film-grain {
   position: fixed;
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.04;
   mix-blend-mode: screen;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain-shift 0.7s steps(5) infinite;
@@ -209,7 +341,7 @@
   background: #000;
 }
 
-/* ---- Marquee ---- */
+/* ---- Marquee (pause on hover) ---- */
 .marquee-track {
   display: inline-flex;
   white-space: nowrap;
@@ -231,7 +363,7 @@
   56%, 100% { opacity: 0.12; }
 }
 
-/* ---- Frame-jitter hover (course cards) ---- */
+/* ---- Frame-jitter hover (cards) ---- */
 .jitter {
   transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
@@ -280,12 +412,8 @@
   transform: translateY(-50%);
   z-index: 1;
 }
-.ticket::before {
-  inset-inline-start: -8px;
-}
-.ticket::after {
-  inset-inline-end: -8px;
-}
+.ticket::before { inset-inline-start: -8px; }
+.ticket::after { inset-inline-end: -8px; }
 .ticket-perf {
   position: absolute;
   top: 10%;
@@ -295,33 +423,7 @@
   z-index: 2;
 }
 
-/* ---- Velvet curtain reveal (hero load) ---- */
-.curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  display: flex;
-  pointer-events: none;
-}
-.curtain > span {
-  flex: 1;
-  background: linear-gradient(
-    180deg,
-    #5a1620 0%,
-    var(--color-crimson) 40%,
-    #4a1119 100%
-  );
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.6);
-}
-.curtain .pleat {
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.25) 0 8px,
-    rgba(255, 255, 255, 0.04) 8px 16px
-  );
-}
-
-/* ---- Spotlight glow (red accent) ---- */
+/* ---- Spotlight glow (red accent, top radial) ---- */
 .spotlight {
   background: radial-gradient(
     ellipse 60% 50% at 50% 0%,
@@ -346,14 +448,20 @@
   scrollbar-width: thin;
   scrollbar-color: var(--color-divider) transparent;
 }
-.soft-scroll::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
+.soft-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
 .soft-scroll::-webkit-scrollbar-thumb {
   background: var(--color-divider);
   border: none;
   border-radius: 0;
+}
+
+/* ---- Tab panel switch animation ---- */
+.tab-panel-enter {
+  animation: tab-fade-slide 0.22s ease both;
+}
+@keyframes tab-fade-slide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---- Reduced motion: disable all decorative animation ---- */
@@ -366,14 +474,9 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .film-grain {
-    animation: none;
-    opacity: 0.03;
-  }
-  .marquee-track {
-    animation: none;
-  }
-  .jitter:hover {
-    animation: none;
-  }
+  .film-grain { animation: none; opacity: 0.025; }
+  .marquee-track { animation: none; }
+  .jitter:hover { animation: none; }
+  .tab-panel-enter { animation: none; }
+  .hero-spotlight::before { display: none; }
 }

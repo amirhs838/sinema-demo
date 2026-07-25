@@ -1,20 +1,43 @@
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
 import { BRAND } from "./data";
 import { Reveal } from "./reveal";
 
 // ============================================================
-// ۲. هیرو سینمایی (فول‌بلید) — letterbox + تایپوگرافی پوستری + بلیت CTA
+// ۲. هیرو سینمایی — letterbox + تایپوگرافی پوستری + اسپات‌لایت کرسر
+//    Primary (solid red) + Secondary (outline) buttons, split clearly.
 // ============================================================
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+
+  // Spotlight cursor — desktop only; CSS disables the ::before on touch devices.
+  const onMouseMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--x", `${e.clientX - r.left}px`);
+    el.style.setProperty("--y", `${e.clientY - r.top}px`);
+  };
+
   return (
-    <section id="home" className="relative flex min-h-[100svh] flex-col overflow-hidden">
+    <section
+      id="home"
+      ref={ref}
+      onMouseMove={onMouseMove}
+      className="hero-spotlight relative flex min-h-[100svh] flex-col overflow-hidden"
+    >
       {/* Background cinema-hall image */}
-      <img
+      <Image
         src="/images/hero-cinema.png"
         alt="سالن سینمای آرت‌هاوس با نور اسپات‌لایت روی صحنه و پردهٔ مخمل"
-        className="absolute inset-0 h-full w-full object-cover"
-        fetchPriority="high"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
       />
-      {/* Legibility overlays — dark scrim on the text side (hero stays a dark cinematic "screen") */}
+      {/* Legibility overlays — dark scrim on the text side */}
       <div className="absolute inset-0 bg-gradient-to-l from-ink via-ink/75 to-ink/20" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-ink/40" />
 
@@ -33,13 +56,18 @@ export function Hero() {
               </span>
             </div>
 
-            {/* Poster-style stacked title — white text on the dark cinematic hero */}
-            <h1 className="font-display font-extrabold leading-[0.98]">
-              <span className="block text-lg text-white/70 sm:text-3xl">آموزشگاه آزاد</span>
-              <span className="mt-0.5 block bg-gradient-to-b from-gold-hover to-gold bg-clip-text text-5xl text-transparent sm:text-7xl lg:text-8xl">
+            {/* Poster-style stacked title — fluid display size */}
+            <h1
+              className="font-display font-extrabold leading-[0.98]"
+              style={{ fontSize: "var(--fs-display)" }}
+            >
+              <span className="block text-lg text-white/70 sm:text-3xl" style={{ fontSize: undefined }}>
+                آموزشگاه آزاد
+              </span>
+              <span className="mt-0.5 block bg-gradient-to-b from-gold-hover to-gold bg-clip-text text-transparent">
                 سینمایی
               </span>
-              <span className="block text-5xl text-white sm:text-7xl lg:text-8xl">فیلم‌نما</span>
+              <span className="block text-white">فیلم‌نما</span>
             </h1>
 
             {/* Tagline subtitle */}
@@ -47,31 +75,16 @@ export function Hero() {
               {BRAND.tagline}
             </p>
 
-            {/* CTAs */}
-            <div className="mt-7 flex flex-col items-start gap-5 sm:mt-9 sm:flex-row sm:items-center sm:gap-6">
-              {/* Ticket CTA with perforated edge */}
-              <a
-                href="#courses"
-                className="ticket group inline-flex items-stretch bg-gold text-white shadow-[0_10px_40px_-12px_rgba(225,29,42,0.55)] transition-colors hover:bg-gold-hover"
-              >
-                <span className="flex items-center gap-2 px-6 py-3.5 font-display text-base font-bold sm:px-7">
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                  مشاهده دوره‌ها
-                </span>
-                <span className="flex items-center border-s border-dashed border-white/45 px-4 font-latin text-sm tracking-widest">
-                  SCENE&nbsp;01
-                </span>
+            {/* CTAs — Primary (solid red) + Secondary (outline) */}
+            <div className="mt-7 flex flex-col items-start gap-4 sm:mt-9 sm:flex-row sm:items-center sm:gap-5">
+              <a href="#courses" className="btn-primary text-sm sm:text-base">
+                مشاهده دوره‌ها
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
               </a>
-
-              {/* Secondary text CTA */}
-              <a
-                href="#about"
-                className="group inline-flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-gold sm:text-base"
-              >
-                <span>چرا فیلم‌نما؟</span>
-                <span className="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
+              <a href="#about" className="btn-secondary text-sm sm:text-base">
+                چرا فیلم‌نما؟
               </a>
             </div>
           </Reveal>

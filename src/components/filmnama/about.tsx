@@ -9,15 +9,9 @@ const CLAPPER_FIELDS: { label: string; value: string }[] = [
   { label: "PRODUCTION", value: "فیلم‌نما" },
   { label: "ACADEMY", value: "آموزشگاه آزاد سینمایی" },
   { label: "LOCATION", value: "اندیشه، غرب تهران" },
-  { label: "DISCIPLINES", value: "۷ رشتهٔ آموزشی" },
+  { label: "DISCIPLINES", value: "۷ رشتهٔ سینما + ۶ دپارتمان" },
   { label: "CERTIFICATE", value: "مدرک بین‌المللی" },
   { label: "HOURS", value: "هر روز ۱۳–۲۱" },
-];
-
-const STATS = [
-  { num: "۷", label: "رشتهٔ آموزشی" },
-  { num: "۳", label: "استادِ سینما و تلویزیون" },
-  { num: "∞", label: "کلاکتِ زده‌شده" },
 ];
 
 export function About() {
@@ -36,28 +30,16 @@ export function About() {
           {/* Intro text — wider column */}
           <Reveal className="lg:col-span-7" delay={0.05}>
             <p className="text-[15px] leading-relaxed text-ivory/90 sm:text-lg">
-              {BRAND.fullName} تنها کارگاه سینمایی غرب تهران است که آموزش حرفه‌ای سینما
-              را با <span className="text-gold">مدرکی بین‌المللی</span> ارائه می‌دهد. در
-              هفت رشتهٔ تخصصی — از بازیگری مقابل دوربین تا تدوین و فن بیان — کنار
-              اساتیدِ باسابقهٔ سینما و تلویزیون ایران کار می‌کنید.
+              {BRAND.fullName} دو بازو دارد: یک <span className="text-gold">آکادمی</span> که
+              با مدرکی بین‌المللی حرفه‌ای‌ات می‌کند، و یک <span className="text-gold">کارگاه
+              تولید</span> که از فیلم‌نامه تا اکران فیلم می‌سازد. اینجا فقط کلاس نیست؛
+              تولیدمحور است.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-khaki sm:mt-5 sm:text-base">
               ما به جای آموزشِ تئوریِ خشک، یک کارگاه واقعی را تجربه می‌کنید: نور روشن
               می‌شود، کلاکت می‌خورد، و شما می‌سازید. از اولین قاب تا نسخهٔ نهایی، در
               یک سالن واقعی سینما یاد می‌گیرید.
             </p>
-
-            {/* Stats row */}
-            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-divider pt-6 sm:mt-9 sm:pt-7">
-              {STATS.map((s) => (
-                <div key={s.label}>
-                  <div className="font-display text-2xl font-extrabold text-gold sm:text-4xl">
-                    {s.num}
-                  </div>
-                  <div className="mt-1 text-[11px] text-khaki sm:text-sm sm:text-base">{s.label}</div>
-                </div>
-              ))}
-            </div>
           </Reveal>
 
           {/* Clapperboard card — narrower column */}
@@ -84,7 +66,7 @@ export function About() {
               </div>
 
               {/* Clapper body — slate fields */}
-              <div className="bg-noir-2 p-4 sm:p-5">
+              <div className="bg-surface p-4 sm:p-5">
                 <div className="space-y-0">
                   {CLAPPER_FIELDS.map((f, i) => (
                     <div

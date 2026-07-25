@@ -2,9 +2,8 @@ import { FilmGrain } from "@/components/filmnama/grain";
 import { Header } from "@/components/filmnama/header";
 import { Hero } from "@/components/filmnama/hero";
 import { Marquee } from "@/components/filmnama/marquee";
-import { Paths } from "@/components/filmnama/paths";
+import { Stats } from "@/components/filmnama/stats";
 import { About } from "@/components/filmnama/about";
-import { Departments } from "@/components/filmnama/departments";
 import { Courses } from "@/components/filmnama/courses";
 import { Teachers } from "@/components/filmnama/teachers";
 import { Screening } from "@/components/filmnama/screening";
@@ -27,31 +26,29 @@ export default function Home() {
       <Header />
 
       <main className="flex-1">
-        {/* ۲. هیرو سینمایی (فول‌بلید + letterbox + بلیت CTA) */}
+        {/* ۲. هیرو سینمایی (letterbox + اسپات‌لایت کرسر + دکمه‌های Primary/Secondary) */}
         <Hero />
-        {/* ۳. نوار مارکی — چراغ‌های تابلوی سینما */}
+        {/* ۳. مارکی دپارتمان‌ها (تزئینی، aria-hidden) */}
         <Marquee />
-        {/* ۴. دو مسیر، یک فیلم‌نما (آکادمی + کارگاه تولید) */}
-        <Paths />
-        {/* ۵. چرا فیلم‌نما (درباره) + تخته کلاکت */}
+        {/* ۴. نوار آماری */}
+        <Stats />
+        {/* ۵. چرا فیلم‌نما (درباره) + تخته کلاکت (پیام دو بازو: آکادمی/کارگاه) */}
         <About />
-        {/* ۶. دپارتمان‌های آکادمی — هفت کارت با آیکون */}
-        <Departments />
-        {/* ۷. دپارتمان هنرهای نمایشی — کارت‌های فریم ۳۵mm */}
+        {/* ۶. دوره‌ها — تب‌سوییچر سینما / سایر دپارتمان‌ها */}
         <Courses />
-        {/* ۸. اساتید — تیتراژ فیلم */}
+        {/* ۷. اساتید — تیتراژ فیلم (عکس یکدست B&W + تینت قرمز) */}
         <Teachers />
-        {/* ۹. کارگاه تولید / اتاق نمایش / آثار هنرجویان */}
+        {/* ۸. آثار هنرجویان روی پرده */}
         <Screening />
-        {/* ۱۰. مقالات — مجلهٔ سینمایی */}
+        {/* ۹. مجلهٔ سینمایی */}
         <Articles />
-        {/* ۱۱. نظرات هنرجویان */}
+        {/* ۱۰. نظرات هنرجویان */}
         <Testimonials />
-        {/* ۱۲. ثبت‌نام / تماس (باجهٔ بلیت‌فروشی) */}
+        {/* ۱۱. ثبت‌نام / تماس (باجهٔ بلیت‌فروشی) */}
         <Contact />
       </main>
 
-      {/* ۱۳. فوتر — تیتراژ پایان فیلم (THE END / پایان) */}
+      {/* ۱۲. فوتر — تیتراژ پایان فیلم (THE END / پایان) */}
       <Footer />
     </div>
   );

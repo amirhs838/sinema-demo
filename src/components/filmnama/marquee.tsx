@@ -8,7 +8,7 @@ export function Marquee() {
   return (
     <div
       className="marquee-mask relative overflow-hidden border-y border-divider bg-noir-2 py-2.5 sm:py-3.5"
-      aria-label="رشته‌های آموزشی فیلم‌نما"
+      aria-hidden="true"
     >
       <div className="marquee-track" dir="ltr">
         {items.map((item, i) => (

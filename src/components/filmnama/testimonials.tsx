@@ -1,3 +1,4 @@
+import { Film } from "lucide-react";
 import { VOICES, BRAND } from "./data";
 import { Reveal } from "./reveal";
 
@@ -19,8 +20,10 @@ function StarRow() {
 
 function InitialsAvatar({ name }: { name: string }) {
   return (
-    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold/40 bg-noir font-display text-sm font-bold text-gold">
-      {name.slice(0, 1)}
+    <span className="voice-avatar grid h-10 w-10 shrink-0 place-items-center rounded-full border border-gold/40 font-display text-sm font-bold text-gold">
+      {/* film-reel icon behind the initial, very low opacity */}
+      <Film className="absolute h-7 w-7 text-ivory/10" strokeWidth={1.5} aria-hidden="true" />
+      <span className="relative z-10">{name.slice(0, 1)}</span>
     </span>
   );
 }
@@ -44,7 +47,7 @@ export function Testimonials() {
         <div className="grid gap-6 md:grid-cols-3">
           {VOICES.map((v, i) => (
             <Reveal key={v.name} delay={i * 0.08}>
-              <figure className="spotlight relative flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-noir-2 p-5 transition-colors hover:border-gold/50 sm:p-6">
+              <figure className="spotlight relative flex h-full flex-col overflow-hidden rounded-sm border border-divider bg-surface p-5 transition-colors hover:border-gold/50 sm:p-6">
                 {/* big decorative quote mark */}
                 <div className="font-display text-5xl leading-none text-gold/25 sm:text-6xl" aria-hidden="true">
                   ”
@@ -70,7 +73,7 @@ export function Testimonials() {
 
         {/* Invite banner */}
         <Reveal delay={0.1}>
-          <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-sm border border-gold/40 bg-noir-2/60 p-5 text-center sm:flex-row sm:text-start">
+          <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-sm border border-gold/40 bg-surface/60 p-5 text-center sm:flex-row sm:text-start">
             <div>
               <h3 className="font-display text-lg font-bold text-ivory">
                 تجربهٔ شما را هم می‌خوانیم
@@ -83,7 +86,7 @@ export function Testimonials() {
               href={BRAND.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-2 bg-gold px-5 py-2.5 font-display text-sm font-bold text-noir transition-colors hover:bg-gold-hover"
+              className="btn-primary shrink-0 text-sm"
             >
               <span>@{BRAND.instagram}</span>
               <span aria-hidden="true">←</span>

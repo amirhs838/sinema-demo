@@ -1,9 +1,10 @@
+import Image from "next/image";
 import { TEACHERS } from "./data";
 import { Reveal } from "./reveal";
 
 // ============================================================
-// ۶. اساتید — به سبک تیتراژ فیلم (Cast & Crew)
-//    عکس‌های واقعی اساتید با درمانِ سینمایی گرم (duotone طلایی روی نویر)
+// ۵. اساتید — به سبک تیتراژ فیلم (Cast & Crew)
+//    همهٔ عکس‌ها با درمانِ یکدست سیاه‌وسفید + تینت قرمز (کلاس teacher-photo)
 // ============================================================
 
 export function Teachers() {
@@ -25,10 +26,9 @@ export function Teachers() {
         <div className="grid gap-6 md:grid-cols-3">
           {TEACHERS.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08}>
-              <article className="group h-full overflow-hidden rounded-sm border border-divider bg-noir transition-colors hover:border-gold/60">
-                {/* Cinematic portrait — real photo with red duotone treatment.
-                    Photo zone stays dark (like a film still); name plate overlays in white. */}
-                <div className="spotlight relative aspect-[3/4] overflow-hidden border-b border-divider sm:aspect-[4/5]">
+              <article className="group h-full overflow-hidden rounded-sm border border-divider bg-surface transition-colors hover:border-gold/60">
+                {/* Cinematic portrait — unified B&W + red multiply via .teacher-photo */}
+                <div className="teacher-photo relative aspect-[3/4] border-b border-divider sm:aspect-[4/5]">
                   {/* corner slate labels */}
                   <span className="absolute start-3 top-3 z-20 bg-ink/75 px-2 py-0.5 font-latin text-[10px] tracking-widest text-gold">
                     CAST
@@ -37,21 +37,18 @@ export function Teachers() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  {/* Photo — absolute background layer, red duotone tint for brand cohesion */}
-                  <img
+                  {/* Photo */}
+                  <Image
                     src={t.image}
                     alt={`${t.name} — ${t.role}`}
-                    className="absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 [filter:saturate(0.8)_contrast(1.1)_brightness(0.92)] group-hover:[filter:saturate(1)_contrast(1.05)_brightness(1)]"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover object-top"
                     loading="lazy"
                   />
-                  {/* Red duotone overlay */}
-                  <div
-                    className="absolute inset-0 z-10 mix-blend-soft-light transition-opacity duration-500 group-hover:opacity-30"
-                    style={{ backgroundColor: "#e11d2a" }}
-                  />
-                  {/* Dark fade into card bottom + vignette (keeps name plate readable) */}
+                  {/* Dark fade into card bottom (keeps name plate readable) */}
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-                  <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(14,12,11,0.55)_100%)]" />
+                  <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(11,11,12,0.55)_100%)]" />
 
                   {/* Name plate on photo (film-credit style) — full width, pinned to bottom */}
                   <div className="absolute inset-x-0 bottom-0 z-20 p-3 sm:p-4">

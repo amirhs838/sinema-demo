@@ -121,7 +121,7 @@ export function Contact() {
 
         {/* USSD featured booth */}
         <Reveal>
-          <div className="relative overflow-hidden rounded-sm border-2 border-gold/50 bg-noir">
+          <div className="relative overflow-hidden rounded-sm border-2 border-gold/50 bg-surface">
             <div className="flex items-center justify-between border-b border-gold/30 bg-gold/5 px-4 py-3 sm:px-6">
               <span className="font-latin text-[11px] tracking-[0.25em] text-gold sm:text-sm">
                 BOX OFFICE · ثبت‌نام سریع
@@ -138,7 +138,7 @@ export function Contact() {
                   تماس بگیرند. (دکمهٔ کپی هم در کنار آن است.)
                 </p>
               </div>
-              <div className="flex items-center justify-between gap-3 rounded-sm border border-divider bg-noir-2 px-3 py-3.5 sm:px-5 sm:py-4">
+              <div className="flex items-center justify-between gap-3 rounded-sm border border-divider bg-noir px-3 py-3.5 sm:px-5 sm:py-4">
                 <code className="font-latin text-lg tracking-[0.12em] text-gold sm:text-3xl" dir="ltr">
                   {BRAND.ussd}
                 </code>
@@ -154,7 +154,7 @@ export function Contact() {
           <Reveal>
             <a
               href={`tel:${BRAND.phoneMobile}`}
-              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-4 transition-colors hover:border-gold/60 sm:p-5"
+              className="group flex h-full flex-col rounded-sm border border-divider bg-surface p-4 transition-colors hover:border-gold/60 hover:bg-surface-hover sm:p-5"
             >
               <div className="flex items-center justify-between">
                 <IconPhone className="h-6 w-6 text-gold" />
@@ -171,7 +171,7 @@ export function Contact() {
           <Reveal delay={0.06}>
             <a
               href={`tel:${BRAND.phoneLandline}`}
-              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-4 transition-colors hover:border-gold/60 sm:p-5"
+              className="group flex h-full flex-col rounded-sm border border-divider bg-surface p-4 transition-colors hover:border-gold/60 hover:bg-surface-hover sm:p-5"
             >
               <div className="flex items-center justify-between">
                 <IconPhone className="h-6 w-6 text-gold" />
@@ -190,7 +190,7 @@ export function Contact() {
               href={BRAND.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex h-full flex-col rounded-sm border border-divider bg-noir p-4 transition-colors hover:border-gold/60 sm:p-5"
+              className="group flex h-full flex-col rounded-sm border border-divider bg-surface p-4 transition-colors hover:border-gold/60 hover:bg-surface-hover sm:p-5"
             >
               <div className="flex items-center justify-between">
                 <IconInstagram className="h-6 w-6 text-gold" />
@@ -205,7 +205,7 @@ export function Contact() {
 
           {/* Hours */}
           <Reveal delay={0.18}>
-            <div className="flex h-full flex-col rounded-sm border border-divider bg-noir p-4 sm:p-5">
+            <div className="flex h-full flex-col rounded-sm border border-divider bg-surface p-4 transition-colors hover:bg-surface-hover sm:p-5">
               <div className="flex items-center justify-between">
                 <IconClock className="h-6 w-6 text-gold" />
                 <span className="font-latin text-[10px] tracking-widest text-khaki">HOURS</span>
@@ -218,7 +218,7 @@ export function Contact() {
 
         {/* Address banner */}
         <Reveal delay={0.1}>
-          <div className="mt-5 flex flex-col items-start justify-between gap-4 rounded-sm border border-divider bg-noir p-4 sm:mt-6 sm:flex-row sm:items-center sm:p-6">
+          <div className="mt-5 flex flex-col items-start justify-between gap-4 rounded-sm border border-divider bg-surface p-4 sm:mt-6 sm:flex-row sm:items-center sm:p-6">
             <div className="flex items-start gap-3 sm:gap-4">
               <IconPin className="h-6 w-6 shrink-0 text-gold" />
               <div>
