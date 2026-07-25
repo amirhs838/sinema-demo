@@ -82,58 +82,62 @@ export function Header() {
           ))}
         </nav>
 
-        {/* CTA — visible on all sizes; compact on mobile */}
-        <a
-          href="#contact"
-          className="btn-primary text-xs px-3.5 py-2 lg:text-sm lg:px-7 lg:py-3.5"
-        >
-          ثبت‌نام
-        </a>
-
-        {/* Mobile menu trigger */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger
-            asChild
-            aria-label="باز کردن منو"
-            className={`inline-flex h-10 w-10 items-center justify-center transition-colors lg:hidden ${
-              scrolled ? "text-ivory" : "text-white"
-            }`}
-          >
-            <button type="button">
-              <Menu className="h-6 w-6" />
-            </button>
-          </SheetTrigger>
-          <SheetContent
-            side="right"
-            className="w-[280px] border-divider bg-noir-2 p-0"
-          >
-            <SheetHeader className="border-b border-divider px-5 py-4 text-start">
-              <SheetTitle className="flex items-center gap-2 text-ivory">
-                <FilmnamaLogo height={32} />
-                <span className="font-display text-lg font-extrabold">{BRAND.name}</span>
-              </SheetTitle>
-            </SheetHeader>
-            <nav className="flex flex-col px-2 py-3" aria-label="ناوبری موبایل">
-              {NAV.map((item) => (
+        {/* Left-side group: hamburger (mobile) + CTA.
+            In RTL, CTA (last child) sits at the far-left corner. */}
+        <div className="flex items-center gap-2">
+          {/* Mobile menu trigger */}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              asChild
+              aria-label="باز کردن منو"
+              className={`inline-flex h-10 w-10 items-center justify-center transition-colors lg:hidden ${
+                scrolled ? "text-ivory" : "text-white"
+              }`}
+            >
+              <button type="button">
+                <Menu className="h-6 w-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="w-[280px] border-divider bg-noir-2 p-0"
+            >
+              <SheetHeader className="border-b border-divider px-5 py-4 text-start">
+                <SheetTitle className="flex items-center gap-2 text-ivory">
+                  <FilmnamaLogo height={32} />
+                  <span className="font-display text-lg font-extrabold">{BRAND.name}</span>
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col px-2 py-3" aria-label="ناوبری موبایل">
+                {NAV.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="border-b border-divider/60 px-4 py-3.5 text-base text-khaki transition-colors hover:bg-noir hover:text-gold"
+                  >
+                    {item.label}
+                  </a>
+                ))}
                 <a
-                  key={item.href}
-                  href={item.href}
+                  href="#contact"
                   onClick={() => setOpen(false)}
-                  className="border-b border-divider/60 px-4 py-3.5 text-base text-khaki transition-colors hover:bg-noir hover:text-gold"
+                  className="btn-primary mt-4 w-full justify-center"
                 >
-                  {item.label}
+                  ثبت‌نام
                 </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="btn-primary mt-4 w-full justify-center"
-              >
-                ثبت‌نام
-              </a>
-            </nav>
-          </SheetContent>
-        </Sheet>
+              </nav>
+            </SheetContent>
+          </Sheet>
+
+          {/* CTA — visible on all sizes; compact on mobile */}
+          <a
+            href="#contact"
+            className="btn-primary text-xs px-3.5 py-2 lg:text-sm lg:px-7 lg:py-3.5"
+          >
+            ثبت‌نام
+          </a>
+        </div>
       </div>
     </header>
   );

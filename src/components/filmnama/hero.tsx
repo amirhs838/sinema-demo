@@ -76,7 +76,7 @@ export function Hero() {
             </p>
 
             {/* CTAs — on mobile: "چرا فیلم‌نما؟" first, then "مشاهده دوره‌ها"; on desktop: reversed */}
-            <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:items-center sm:gap-5">
+            <div className="mt-7 flex flex-col items-start gap-4 sm:mt-9 sm:flex-row sm:items-center sm:gap-5">
               <a href="#about" className="btn-secondary order-1 text-sm sm:order-2 sm:text-base">
                 چرا فیلم‌نما؟
               </a>
