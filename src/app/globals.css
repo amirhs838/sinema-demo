@@ -341,11 +341,15 @@ button:focus-visible {
   background: #000;
 }
 
-/* ---- Marquee (pause on hover) ---- */
+/* ---- Marquee (pause on hover, seamless loop) ---- */
 .marquee-track {
-  display: inline-flex;
+  display: flex;
+  width: max-content;
   white-space: nowrap;
-  animation: marquee-scroll 32s linear infinite;
+  animation: marquee-scroll 40s linear infinite;
+}
+.marquee-track > * {
+  flex: 0 0 auto;
 }
 .marquee-mask:hover .marquee-track {
   animation-play-state: paused;

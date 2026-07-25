@@ -13,15 +13,15 @@ export function Marquee() {
       <div className="marquee-track" dir="ltr">
         {items.map((item, i) => (
           <span key={i} className="inline-flex items-center">
-            {/* Latin label + Persian label together, no gap between them */}
+            {/* Latin label + Persian label together */}
             <span className="font-latin text-base tracking-wide text-gold sm:text-2xl">
               {item.en}
             </span>
-            <span className="font-display ms-2 text-sm text-ivory/85 sm:ms-3 sm:text-xl">
+            <span className="font-display ms-1.5 text-sm text-ivory/85 sm:ms-2 sm:text-xl">
               {item.fa}
             </span>
-            {/* چراغ چشمک‌زن بین آیتم‌ها */}
-            <span className="lamp-dot mx-3 inline-block h-2 w-2 rounded-full bg-gold shadow-[0_0_8px_2px_rgba(225,29,42,0.6)] sm:mx-4" />
+            {/* چراغ چشمک‌زن بین آیتم‌ها — فقط یک نقطهٔ کوچک */}
+            <span className="lamp-dot ms-3 inline-block h-1.5 w-1.5 rounded-full bg-gold sm:ms-4" />
           </span>
         ))}
       </div>
