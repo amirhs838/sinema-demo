@@ -1,41 +1,89 @@
+"use client";
+
+import { useState, useCallback, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { WORKS, BRAND } from "./data";
 import { Reveal } from "./reveal";
 
 // ============================================================
-// ۷. اتاق نمایش / آثار هنرجویان — گالری تاریک با حال‌وهوای سالن سینما
-//    تامبنیل ویدیویی با آیکون پلی به‌شکل حلقهٔ پروژکتور
+// ۷. اتاق نمایش / آثار هنرجویان — اسلایدر نمونه‌کار با موکاپ مرکزی
+//    اسلاید قبلی/بعدی محوشده در کناره‌ها، بلوک متنی + CTA، swipe پشتیبانی می‌شود.
 // ============================================================
+
+// prefers-reduced-motion
+const subscribeReduced = (cb: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener?.("change", cb);
+  return () => mq.removeEventListener?.("change", cb);
+};
+const getReducedSnap = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const getReducedServer = () => false;
 
 function ProjectorPlay() {
   return (
     <div className="group/play relative grid h-16 w-16 place-items-center rounded-full border-2 border-gold/70 transition-all duration-300 group-hover:scale-110 group-hover:border-gold sm:h-20 sm:w-20">
-      {/* inner lens ring */}
       <span className="absolute inset-2 rounded-full border border-gold/40" />
       <span className="absolute inset-4 rounded-full border border-gold/20" />
-      <svg viewBox="0 0 24 24" className="h-5 w-5 text-gold sm:h-6 sm:w-6" fill="currentColor" aria-hidden="true">
-        <path d="M8 5v14l11-7z" />
-      </svg>
+      <Play className="h-5 w-5 fill-gold text-gold sm:h-6 sm:w-6" aria-hidden="true" />
     </div>
   );
 }
 
 export function Screening() {
+  const [active, setActive] = useState(0);
+  const reduced = useSyncExternalStore(subscribeReduced, getReducedSnap, getReducedServer);
+  const total = WORKS.length;
+  const touchStartX = useRef<number | null>(null);
+
+  const go = useCallback(
+    (n: number) => setActive(((n % total) + total) % total),
+    [total]
+  );
+  const next = useCallback(() => setActive((a) => (a + 1) % total), []);
+  const prev = useCallback(() => setActive((a) => (a - 1 + total) % total), [total]);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || reduced) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 45) {
+      // RTL: swipe right → previous, swipe left → next
+      if (dx < 0) next();
+      else prev();
+    }
+    touchStartX.current = null;
+  };
+
+  const w = WORKS[active];
+  const prevIdx = (active - 1 + total) % total;
+  const nextIdx = (active + 1) % total;
+
   return (
     <section
       id="screening"
       className="relative overflow-hidden border-b border-divider bg-noir py-14 sm:py-28"
     >
-      {/* Cinema-seats backdrop (subtle texture on black) */}
-      <Image
-        src="/images/screening-seats.png"
-        alt=""
+      {/* Ambient color blobs (purple / blue / orange, very low contrast) */}
+      <div
+        className="pointer-events-none absolute -top-20 start-1/4 h-72 w-72 rounded-full opacity-[0.18] blur-[100px]"
+        style={{ background: "#7c3aed" }}
         aria-hidden="true"
-        fill
-        sizes="100vw"
-        className="object-cover opacity-[0.12]"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-noir via-noir/80 to-noir" />
+      <div
+        className="pointer-events-none absolute top-1/3 end-1/4 h-80 w-80 rounded-full opacity-[0.15] blur-[110px]"
+        style={{ background: "#2563eb" }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 start-1/3 h-72 w-72 rounded-full opacity-[0.16] blur-[100px]"
+        style={{ background: "#ea580c" }}
+        aria-hidden="true"
+      />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
@@ -50,51 +98,142 @@ export function Screening() {
           </p>
         </Reveal>
 
-        <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
-          {WORKS.map((w, i) => (
-            <Reveal key={w.title} delay={i * 0.08}>
+        {/* Carousel */}
+        <div
+          className="relative"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="آثار هنرجویان فیلم‌نما"
+        >
+          {/* Mockup stage — prev (blurred) | center | next (blurred) */}
+          <div className="relative flex items-center justify-center gap-2 sm:gap-4">
+            {/* Previous slide (blurred edge) */}
+            <button
+              type="button"
+              onClick={prev}
+              aria-label={`اسلاید قبلی: ${WORKS[prevIdx].title}`}
+              className="group/edge relative hidden aspect-video w-[14%] shrink-0 overflow-hidden rounded-2xl border border-divider opacity-30 blur-[2px] transition-all hover:opacity-50 md:block"
+            >
+              <Image
+                src="/images/screening-seats.png"
+                alt=""
+                aria-hidden="true"
+                fill
+                sizes="14vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-ink/40" />
+            </button>
+
+            {/* Center mockup */}
+            <div key={active} className="tab-panel-enter relative w-full max-w-3xl shrink-0">
               <a
                 href={BRAND.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`مشاهدهٔ فیلم ${w.title} در اینستاگرام فیلم‌نما`}
-                className="group block overflow-hidden rounded-sm border border-divider bg-surface transition-colors hover:border-gold/60"
+                aria-label={`تماشای فیلم ${w.title} در اینستاگرام فیلم‌نما`}
+                className="group relative block aspect-video overflow-hidden rounded-3xl border border-divider bg-surface shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)]"
               >
-                {/* Thumbnail */}
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src="/images/screening-seats.png"
-                    alt={`پوستهٔ فیلم کوتاه ${w.title}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover opacity-50 transition-opacity duration-500 group-hover:opacity-70"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
+                <Image
+                  src="/images/screening-seats.png"
+                  alt={`پوستهٔ فیلم کوتاه ${w.title}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                  className="object-cover opacity-60 transition-opacity duration-500 group-hover:opacity-80"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
 
-                  {/* slate label — dark chip over photo */}
-                  <span className="absolute start-3 top-3 bg-ink/80 px-2 py-1 font-latin text-[10px] tracking-widest text-gold">
-                    {w.kind === "فیلم کوتاه" ? "SHORT FILM" : "FILM"}
-                  </span>
+                {/* slate label */}
+                <span className="absolute start-4 top-4 bg-gold px-3 py-1 font-latin text-[10px] font-bold tracking-widest text-white">
+                  {w.kind === "فیلم کوتاه" ? "SHORT FILM" : "FILM"}
+                </span>
 
-                  {/* projector-ring play */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <ProjectorPlay />
-                  </div>
-                </div>
-
-                {/* Meta */}
-                <div className="p-4 sm:p-5">
-                  <div className="font-latin text-[11px] tracking-[0.2em] text-khaki">
-                    {w.kind}
-                  </div>
-                  <h3 className="mt-1 font-display text-2xl font-extrabold text-ivory">
-                    «{w.title}»
-                  </h3>
-                  <div className="mt-2 text-sm text-khaki">{w.director}</div>
+                {/* projector-ring play */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <ProjectorPlay />
                 </div>
               </a>
-            </Reveal>
-          ))}
+            </div>
+
+            {/* Next slide (blurred edge) */}
+            <button
+              type="button"
+              onClick={next}
+              aria-label={`اسلاید بعدی: ${WORKS[nextIdx].title}`}
+              className="group/edge relative hidden aspect-video w-[14%] shrink-0 overflow-hidden rounded-2xl border border-divider opacity-30 blur-[2px] transition-all hover:opacity-50 md:block"
+            >
+              <Image
+                src="/images/screening-seats.png"
+                alt=""
+                aria-hidden="true"
+                fill
+                sizes="14vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-ink/40" />
+            </button>
+          </div>
+
+          {/* Text block below the mockup */}
+          <div key={`txt-${active}`} className="tab-panel-enter mx-auto mt-8 max-w-2xl text-center">
+            <div className="font-latin text-xs tracking-[0.3em] text-gold">{w.director}</div>
+            <h3 className="mt-2 font-display text-3xl font-extrabold text-ivory sm:text-4xl">
+              «{w.title}»
+            </h3>
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-khaki sm:text-base">
+              {w.logline}
+            </p>
+
+            {/* CTA + nav arrows */}
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={BRAND.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-sm sm:text-base"
+              >
+                <Play className="h-4 w-4 fill-current" aria-hidden="true" />
+                تماشای فیلم
+              </a>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={prev}
+                  aria-label="اثر قبلی"
+                  className="grid h-11 w-11 place-items-center rounded-full border border-divider bg-surface text-ivory transition-all hover:border-gold hover:bg-surface-hover hover:text-gold"
+                >
+                  <ChevronRight className="h-5 w-5" aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  onClick={next}
+                  aria-label="اثر بعدی"
+                  className="grid h-11 w-11 place-items-center rounded-full border border-divider bg-surface text-ivory transition-all hover:border-gold hover:bg-surface-hover hover:text-gold"
+                >
+                  <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            {/* pagination dots */}
+            <div className="mt-6 flex items-center justify-center gap-2">
+              {WORKS.map((item, i) => (
+                <button
+                  key={item.title}
+                  type="button"
+                  aria-label={`رفتن به اثر ${i + 1}: ${item.title}`}
+                  onClick={() => go(i)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    i === active ? "w-8 bg-gold" : "w-2 bg-divider hover:bg-muted"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
