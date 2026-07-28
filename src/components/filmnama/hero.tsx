@@ -6,9 +6,18 @@ import { BRAND } from "./data";
 import { Reveal } from "./reveal";
 
 // ============================================================
-// ۲. هیرو سینمایی — letterbox + تایپوگرافی پوستری + اسپات‌لایت کرسر
-//    Primary (solid red) + Secondary (outline) buttons, split clearly.
+// ۲. هیرو سینمایی — ویدیوی پس‌زمینه (یک‌بار پخش، فریم آخر ثابت)
+//    موبایل: ویدیوی عمودی (portrait)؛ دسکتاپ: ویدیوی افقی (landscape).
+//    هر بار رفرش/ورود → ویدیو از نو پخش می‌شود.
 // ============================================================
+
+// Keep video paused on the last frame (no loop). Browsers pause at end by
+// default, but calling pause() explicitly guarantees the last frame stays.
+const handleEnded = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+  const v = e.currentTarget;
+  v.pause();
+};
+
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
 
@@ -28,19 +37,36 @@ export function Hero() {
       onMouseMove={onMouseMove}
       className="hero-spotlight relative flex min-h-[100svh] flex-col overflow-hidden"
     >
-      {/* Background video (cinematic logo in red spotlight) — SEO: poster image + descriptive alt via aria-label */}
+      {/* Background video — desktop (landscape 1280×720).
+          Plays once, freezes on last frame; replays on page reload. */}
       <video
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 hidden h-full w-full object-cover sm:block"
         autoPlay
         muted
-        loop
         playsInline
         preload="metadata"
         poster="/images/hero-cinema.png"
         aria-label="انیمیشن لوگوی فیلم‌نما در نور قرمز اسپات‌لایت سینمایی"
+        onEnded={handleEnded}
       >
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
       </video>
+
+      {/* Background video — mobile (portrait 720×1280).
+          Same behavior: play once, freeze on last frame. */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover sm:hidden"
+        autoPlay
+        muted
+        playsInline
+        preload="metadata"
+        poster="/images/hero-cinema.png"
+        aria-label="انیمیشن لوگوی فیلم‌نما در نور قرمز اسپات‌لایت سینمایی"
+        onEnded={handleEnded}
+      >
+        <source src="/videos/hero-bg-mobile.mp4" type="video/mp4" />
+      </video>
+
       {/* SEO fallback image (hidden, indexed by crawlers) */}
       <Image
         src="/images/hero-cinema.png"
