@@ -38,14 +38,14 @@ export function Hero() {
       className="hero-spotlight relative flex min-h-[100svh] flex-col overflow-hidden"
     >
       {/* Background video — desktop (landscape 1280×720).
-          Plays once, freezes on last frame; replays on page reload. */}
+          Plays once, freezes on last frame; replays on page reload.
+          No poster image — only the video shows (black until first frame). */}
       <video
-        className="absolute inset-0 hidden h-full w-full object-cover sm:block"
+        className="absolute inset-0 hidden h-full w-full object-cover bg-noir sm:block"
         autoPlay
         muted
         playsInline
-        preload="metadata"
-        poster="/images/hero-cinema.png"
+        preload="auto"
         aria-label="انیمیشن لوگوی فیلم‌نما در نور قرمز اسپات‌لایت سینمایی"
         onEnded={handleEnded}
       >
@@ -55,26 +55,27 @@ export function Hero() {
       {/* Background video — mobile (portrait 720×1280).
           Same behavior: play once, freeze on last frame. */}
       <video
-        className="absolute inset-0 h-full w-full object-cover sm:hidden"
+        className="absolute inset-0 h-full w-full object-cover bg-noir sm:hidden"
         autoPlay
         muted
         playsInline
-        preload="metadata"
-        poster="/images/hero-cinema.png"
+        preload="auto"
         aria-label="انیمیشن لوگوی فیلم‌نما در نور قرمز اسپات‌لایت سینمایی"
         onEnded={handleEnded}
       >
         <source src="/videos/hero-bg-mobile.mp4" type="video/mp4" />
       </video>
 
-      {/* SEO fallback image (hidden, indexed by crawlers) */}
+      {/* SEO fallback image — fully hidden visually (display:none, not sr-only which can affect layout),
+          indexed by crawlers that don't execute video. */}
       <Image
         src="/images/hero-cinema.png"
         alt="سالن سینمای آرت‌هاوس با نور اسپات‌لایت روی صحنه و پردهٔ مخمل"
         fill
         priority
         sizes="100vw"
-        className="object-cover sr-only"
+        className="object-cover"
+        style={{ display: "none" }}
       />
       {/* Legibility overlays — dark scrim on the text side */}
       <div className="absolute inset-0 bg-gradient-to-l from-ink via-ink/75 to-ink/20" />
