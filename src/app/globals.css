@@ -478,6 +478,22 @@ button:focus-visible {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ---- Screening slider: horizontal slide-in on change ---- */
+.slide-in-next {
+  animation: slide-in-next 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.slide-in-prev {
+  animation: slide-in-prev 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes slide-in-next {
+  from { opacity: 0; transform: translateX(48px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-prev {
+  from { opacity: 0; transform: translateX(-48px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 /* ---- Reduced motion: disable all decorative animation ---- */
 @media (prefers-reduced-motion: reduce) {
   *,

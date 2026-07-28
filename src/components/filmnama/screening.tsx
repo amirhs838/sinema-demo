@@ -7,11 +7,10 @@ import { WORKS, BRAND } from "./data";
 import { Reveal } from "./reveal";
 
 // ============================================================
-// ۷. اتاق نمایش / آثار هنرجویان — اسلایدر نمونه‌کار با موکاپ مرکزی
-//    اسلاید قبلی/بعدی محوشده در کناره‌ها، بلوک متنی + CTA، swipe پشتیبانی می‌شود.
+// ۷. اتاق نمایش / آثار هنرجویان — اسلایدر با موکاپ مرکزی
+//    انیمیشن اسلاید افقی، swipe لمسی، هر نمونه‌کار تامنیل اختصاصی.
 // ============================================================
 
-// prefers-reduced-motion
 const subscribeReduced = (cb: () => void) => {
   if (typeof window === "undefined") return () => {};
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -24,7 +23,7 @@ const getReducedServer = () => false;
 
 function ProjectorPlay() {
   return (
-    <div className="group/play relative grid h-16 w-16 place-items-center rounded-full border-2 border-gold/70 transition-all duration-300 group-hover:scale-110 group-hover:border-gold sm:h-20 sm:w-20">
+    <div className="relative grid h-16 w-16 place-items-center rounded-full border-2 border-gold/70 transition-all duration-300 group-hover:scale-110 group-hover:border-gold sm:h-20 sm:w-20">
       <span className="absolute inset-2 rounded-full border border-gold/40" />
       <span className="absolute inset-4 rounded-full border border-gold/20" />
       <Play className="h-5 w-5 fill-gold text-gold sm:h-6 sm:w-6" aria-hidden="true" />
@@ -34,16 +33,20 @@ function ProjectorPlay() {
 
 export function Screening() {
   const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(0); // +1 forward, -1 back
   const reduced = useSyncExternalStore(subscribeReduced, getReducedSnap, getReducedServer);
   const total = WORKS.length;
   const touchStartX = useRef<number | null>(null);
 
   const go = useCallback(
-    (n: number) => setActive(((n % total) + total) % total),
+    (n: number, dir: number) => {
+      setDirection(dir);
+      setActive(((n % total) + total) % total);
+    },
     [total]
   );
-  const next = useCallback(() => setActive((a) => (a + 1) % total), []);
-  const prev = useCallback(() => setActive((a) => (a - 1 + total) % total), [total]);
+  const next = useCallback(() => go(active + 1, 1), [active, go]);
+  const prev = useCallback(() => go(active - 1, -1), [active, go]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -63,12 +66,15 @@ export function Screening() {
   const prevIdx = (active - 1 + total) % total;
   const nextIdx = (active + 1) % total;
 
+  // slide-in animation class based on direction
+  const slideAnim = reduced ? "" : direction >= 0 ? "slide-in-next" : "slide-in-prev";
+
   return (
     <section
       id="screening"
       className="relative overflow-hidden border-b border-divider bg-noir py-14 sm:py-28"
     >
-      {/* Ambient color blobs (purple / blue / orange, very low contrast) */}
+      {/* Ambient color blobs */}
       <div
         className="pointer-events-none absolute -top-20 start-1/4 h-72 w-72 rounded-full opacity-[0.18] blur-[100px]"
         style={{ background: "#7c3aed" }}
@@ -98,7 +104,7 @@ export function Screening() {
           </p>
         </Reveal>
 
-        {/* Carousel */}
+        {/* Carousel — swipeable */}
         <div
           className="relative"
           onTouchStart={onTouchStart}
@@ -107,9 +113,9 @@ export function Screening() {
           aria-roledescription="carousel"
           aria-label="آثار هنرجویان فیلم‌نما"
         >
-          {/* Mockup stage — prev (blurred) | center | next (blurred) */}
+          {/* Mockup stage: prev (blurred) | center | next (blurred) */}
           <div className="relative flex items-center justify-center gap-2 sm:gap-4">
-            {/* Previous slide (blurred edge) */}
+            {/* Previous slide edge */}
             <button
               type="button"
               onClick={prev}
@@ -117,7 +123,7 @@ export function Screening() {
               className="group/edge relative hidden aspect-video w-[14%] shrink-0 overflow-hidden rounded-2xl border border-divider opacity-30 blur-[2px] transition-all hover:opacity-50 md:block"
             >
               <Image
-                src="/images/screening-seats.png"
+                src={WORKS[prevIdx].image}
                 alt=""
                 aria-hidden="true"
                 fill
@@ -127,21 +133,22 @@ export function Screening() {
               <div className="absolute inset-0 bg-ink/40" />
             </button>
 
-            {/* Center mockup */}
-            <div key={active} className="tab-panel-enter relative w-full max-w-3xl shrink-0">
+            {/* Center mockup — slides in on change */}
+            <div className="relative w-full max-w-3xl shrink-0 overflow-hidden rounded-3xl">
               <a
                 href={BRAND.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`تماشای فیلم ${w.title} در اینستاگرام فیلم‌نما`}
-                className="group relative block aspect-video overflow-hidden rounded-3xl border border-divider bg-surface shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)]"
+                className={`group relative block aspect-video overflow-hidden rounded-3xl border border-divider bg-surface shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)] ${slideAnim}`}
+                key={active}
               >
                 <Image
-                  src="/images/screening-seats.png"
+                  src={w.image}
                   alt={`پوستهٔ فیلم کوتاه ${w.title}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 60vw"
-                  className="object-cover opacity-60 transition-opacity duration-500 group-hover:opacity-80"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
@@ -158,7 +165,7 @@ export function Screening() {
               </a>
             </div>
 
-            {/* Next slide (blurred edge) */}
+            {/* Next slide edge */}
             <button
               type="button"
               onClick={next}
@@ -166,7 +173,7 @@ export function Screening() {
               className="group/edge relative hidden aspect-video w-[14%] shrink-0 overflow-hidden rounded-2xl border border-divider opacity-30 blur-[2px] transition-all hover:opacity-50 md:block"
             >
               <Image
-                src="/images/screening-seats.png"
+                src={WORKS[nextIdx].image}
                 alt=""
                 aria-hidden="true"
                 fill
@@ -178,7 +185,7 @@ export function Screening() {
           </div>
 
           {/* Text block below the mockup */}
-          <div key={`txt-${active}`} className="tab-panel-enter mx-auto mt-8 max-w-2xl text-center">
+          <div key={`txt-${active}`} className={`mx-auto mt-8 max-w-2xl text-center ${slideAnim}`}>
             <div className="font-latin text-xs tracking-[0.3em] text-gold">{w.director}</div>
             <h3 className="mt-2 font-display text-3xl font-extrabold text-ivory sm:text-4xl">
               «{w.title}»
@@ -226,7 +233,7 @@ export function Screening() {
                   key={item.title}
                   type="button"
                   aria-label={`رفتن به اثر ${i + 1}: ${item.title}`}
-                  onClick={() => go(i)}
+                  onClick={() => go(i, i > active ? 1 : -1)}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     i === active ? "w-8 bg-gold" : "w-2 bg-divider hover:bg-muted"
                   }`}

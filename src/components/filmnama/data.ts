@@ -232,6 +232,7 @@ export type Work = {
   director: string;
   kind: string;
   logline: string;
+  image: string;
 };
 
 export const WORKS: Work[] = [
@@ -240,24 +241,28 @@ export const WORKS: Work[] = [
     director: "اثر هنرجویان فیلم‌نما",
     kind: "فیلم کوتاه",
     logline: "داستان جوانی که در آستانهٔ یک تصمیم بزرگ، با سایه‌های گذشته و تردیدهای درونی‌اش روبه‌رو می‌شود.",
+    image: "/images/work-shadows-of-doubt.png",
   },
   {
     title: "اخفاء",
     director: "ساختهٔ بهنام شعبانی‌مهر",
     kind: "فیلم کوتاه",
     logline: "روایتِ خانواده‌ای که رازی مشترک را سال‌ها از هم پنهان کرده‌اند، تا روزی که این راز آشکار می‌شود.",
+    image: "/images/work-ekhfa.png",
   },
   {
     title: "آخرین قاب",
     director: "ساختهٔ نگار احمدی",
     kind: "فیلم کوتاه",
     logline: "فیلم‌بردار جوانی در آخرین روزِ پروژه‌اش با تصمیمی روبه‌رو می‌شود که مسیرِ زندگی حرفه‌ای‌اش را تغییر می‌دهد.",
+    image: "/images/work-last-frame.png",
   },
   {
     title: "پژواک سکوت",
     director: "ساختهٔ کیان رستمی",
     kind: "فیلم کوتاه",
     logline: "دختری ناشنوا دنیای پرهیاهویِ اطرافش را از دریچه‌ی دوربینش روایت می‌کند، و سکوتش پرمعناترین بخشِ قصه می‌شود.",
+    image: "/images/work-echo-of-silence.png",
   },
 ];
 
