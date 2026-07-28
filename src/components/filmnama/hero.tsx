@@ -28,14 +28,27 @@ export function Hero() {
       onMouseMove={onMouseMove}
       className="hero-spotlight relative flex min-h-[100svh] flex-col overflow-hidden"
     >
-      {/* Background cinema-hall image */}
+      {/* Background video (cinematic logo in red spotlight) — SEO: poster image + descriptive alt via aria-label */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/images/hero-cinema.png"
+        aria-label="انیمیشن لوگوی فیلم‌نما در نور قرمز اسپات‌لایت سینمایی"
+      >
+        <source src="/videos/hero-bg.mp4" type="video/mp4" />
+      </video>
+      {/* SEO fallback image (hidden, indexed by crawlers) */}
       <Image
         src="/images/hero-cinema.png"
         alt="سالن سینمای آرت‌هاوس با نور اسپات‌لایت روی صحنه و پردهٔ مخمل"
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="object-cover sr-only"
       />
       {/* Legibility overlays — dark scrim on the text side */}
       <div className="absolute inset-0 bg-gradient-to-l from-ink via-ink/75 to-ink/20" />
