@@ -27,6 +27,7 @@ const getReducedServerSnapshot = () => false;
 
 export function Teachers() {
   const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(1); // +1 forward, -1 back
   const reduced = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedSnapshot,
@@ -36,16 +37,22 @@ export function Teachers() {
   const total = TEACHERS.length;
 
   const go = useCallback(
-    (next: number) => setActive(((next % total) + total) % total),
+    (n: number, dir: number) => {
+      setDirection(dir);
+      setActive(((n % total) + total) % total);
+    },
     [total]
   );
-  const next = useCallback(() => setActive((a) => (a + 1) % total), []);
-  const prev = useCallback(() => setActive((a) => (a - 1 + total) % total), [total]);
+  const next = useCallback(() => go(active + 1, 1), [active, go]);
+  const prev = useCallback(() => go(active - 1, -1), [active, go]);
 
   // Autoplay every 5s (paused on hover/interaction, disabled for reduced-motion)
   useEffect(() => {
     if (reduced || paused) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % total), AUTOPLAY_MS);
+    const id = setInterval(() => {
+      setDirection(1);
+      setActive((a) => (a + 1) % total);
+    }, AUTOPLAY_MS);
     return () => clearInterval(id);
   }, [reduced, paused, total]);
 
@@ -70,11 +77,11 @@ export function Teachers() {
       else prev();
     }
     touchStartX.current = null;
-    // resume autoplay shortly after
     window.setTimeout(() => setPaused(false), 1500);
   };
 
   const t = TEACHERS[active];
+  const slideAnim = reduced ? "" : direction >= 0 ? "slide-in-next" : "slide-in-prev";
 
   return (
     <section
@@ -119,7 +126,7 @@ export function Teachers() {
         onTouchEnd={onTouchEnd}
       >
         {/* Slide */}
-        <div key={active} className="tab-panel-enter">
+        <div key={active} className={slideAnim}>
           <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
             {/* Image card (left in RTL) */}
             <div className="order-1 lg:order-2">
@@ -199,7 +206,7 @@ export function Teachers() {
                 role="tab"
                 aria-selected={i === active}
                 aria-label={`استاد ${i + 1}: ${teacher.name}`}
-                onClick={() => go(i)}
+                onClick={() => go(i, i > active ? 1 : -1)}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
                   i === active
                     ? "w-10 bg-gold"

@@ -175,8 +175,14 @@ export function Hero() {
         </span>
       </div>
 
-      {/* Bottom letterbox bar */}
-      <div className="letterbox-bar relative z-10 h-7 sm:h-14" />
+      {/* Bottom letterbox bar — gradient transition into the next section (stats) */}
+      <div
+        className="relative z-10 h-7 sm:h-14"
+        style={{
+          background: "linear-gradient(to bottom, #000 0%, #0b0b0c 45%, #121214 100%)",
+        }}
+        aria-hidden="true"
+      />
     </section>
   );
 }
