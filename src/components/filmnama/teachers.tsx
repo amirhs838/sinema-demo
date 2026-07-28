@@ -1,29 +1,28 @@
 "use client";
 
-import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
+import { useState, useEffect, useCallback, useSyncExternalStore, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TEACHERS } from "./data";
 import { Reveal } from "./reveal";
 
 // ============================================================
-// اساتید — کاروسل تک‌نمایشی (یک استاد در هر لحظه)
-// چرخش خودکار هر ۶ ثانیه + دکمه‌های ناوبری + نقاط صفحه‌بندی.
+// اساتید — کاروسل تک‌نمایشیِ چشم‌نواز
+// پخش خودکار هر ۵ ثانیه + ناوبری فلش + نقاط + کشیدن لمسی
 // ============================================================
 
-const AUTOPLAY_MS = 6000;
+const AUTOPLAY_MS = 5000;
 
-// Subscribe to prefers-reduced-motion without setState-in-effect lint issues.
-const prefersReducedMotion = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// prefers-reduced-motion (بدون خطای lint در setState داخل effect)
 const subscribeReducedMotion = (cb: () => void) => {
   if (typeof window === "undefined") return () => {};
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
   mq.addEventListener?.("change", cb);
   return () => mq.removeEventListener?.("change", cb);
 };
-const getReducedSnapshot = () => (prefersReducedMotion() ? true : false);
+const getReducedSnapshot = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const getReducedServerSnapshot = () => false;
 
 export function Teachers() {
@@ -33,33 +32,46 @@ export function Teachers() {
     getReducedSnapshot,
     getReducedServerSnapshot
   );
-
+  const [paused, setPaused] = useState(false);
   const total = TEACHERS.length;
 
   const go = useCallback(
-    (next: number) => {
-      setActive(((next % total) + total) % total);
-    },
+    (next: number) => setActive(((next % total) + total) % total),
     [total]
   );
+  const next = useCallback(() => setActive((a) => (a + 1) % total), []);
+  const prev = useCallback(() => setActive((a) => (a - 1 + total) % total), [total]);
 
-  const next = useCallback(() => go(active + 1), [active, go]);
-  const prev = useCallback(() => go(active - 1), [active, go]);
-
-  // Autoplay every 6s (paused on hover, disabled for reduced-motion)
-  const [paused, setPaused] = useState(false);
+  // Autoplay every 5s (paused on hover/interaction, disabled for reduced-motion)
   useEffect(() => {
     if (reduced || paused) return;
-    const id = setInterval(() => {
-      setActive((a) => (a + 1) % total);
-    }, AUTOPLAY_MS);
+    const id = setInterval(() => setActive((a) => (a + 1) % total), AUTOPLAY_MS);
     return () => clearInterval(id);
   }, [reduced, paused, total]);
 
-  // Keyboard navigation (ArrowLeft/ArrowRight — RTL aware)
+  // Keyboard navigation (RTL-aware)
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") next();
     else if (e.key === "ArrowRight") prev();
+  };
+
+  // Touch / drag swipe support
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setPaused(true);
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 45) {
+      // In RTL: swipe right → previous, swipe left → next
+      if (dx < 0) next();
+      else prev();
+    }
+    touchStartX.current = null;
+    // resume autoplay shortly after
+    window.setTimeout(() => setPaused(false), 1500);
   };
 
   const t = TEACHERS[active];
@@ -71,13 +83,25 @@ export function Teachers() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Heading */}
-      <Reveal className="mx-auto mb-10 max-w-7xl px-4 sm:mb-12 sm:px-6 lg:px-8">
-        <span className="font-latin text-xs tracking-[0.35em] text-gold">CAST &amp; CREW · اساتید</span>
-        <h2 className="title-rule mt-3 font-display text-3xl font-extrabold text-ivory sm:text-5xl">
+      {/* Ambient red glow */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 40% at 50% 30%, rgba(225,29,42,0.10), transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Heading — centered */}
+      <Reveal className="relative mx-auto mb-12 max-w-3xl px-4 text-center sm:mb-16 sm:px-6">
+        <span className="font-latin text-xs tracking-[0.35em] text-gold">
+          CAST &amp; CREW · اساتید
+        </span>
+        <h2 className="title-rule mt-3 inline-block font-display text-3xl font-extrabold text-ivory sm:text-5xl">
           عواملِ صحنهٔ فیلم‌نما
         </h2>
-        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-khaki sm:text-base">
+        <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-khaki sm:text-base">
           کنار اساتیدی کار می‌کنید که خودشان جلوی دوربین و پشت صحنهٔ سینما و تلویزیون
           بوده‌اند.
         </p>
@@ -85,71 +109,89 @@ export function Teachers() {
 
       {/* Carousel viewport */}
       <div
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+        className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8"
         onKeyDown={onKey}
         tabIndex={0}
         role="region"
         aria-roledescription="carousel"
         aria-label="اساتید فیلم‌نما"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
-        <div
-          key={active}
-          className="tab-panel-enter grid items-center gap-8 lg:grid-cols-2 lg:gap-12"
-        >
-          {/* Text column (right in RTL) */}
-          <div className="order-2 lg:order-1">
-            <span className="font-latin text-xs tracking-[0.3em] text-gold">
-              {String(active + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-            </span>
-            <h3 className="mt-3 font-display text-3xl font-extrabold text-ivory sm:text-4xl lg:text-5xl">
-              {t.name}
-            </h3>
-            <div className="mt-2 font-display text-base text-gold sm:text-lg">{t.role}</div>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-khaki sm:text-base">
-              {t.bio}
-            </p>
-          </div>
+        {/* Slide */}
+        <div key={active} className="tab-panel-enter">
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
+            {/* Image card (left in RTL) */}
+            <div className="order-1 lg:order-2">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl border border-divider bg-surface shadow-[0_30px_80px_-30px_rgba(225,29,42,0.35)]">
+                {/* red glow behind photo */}
+                <div
+                  className="absolute inset-0 z-0"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse 75% 65% at 50% 25%, rgba(225,29,42,0.30), transparent 70%)",
+                  }}
+                />
+                <Image
+                  src={t.image}
+                  alt={`${t.name} — ${t.role}`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="relative z-10 object-cover object-top"
+                  loading="lazy"
+                />
+                {/* dark fade at bottom for depth */}
+                <div className="absolute inset-x-0 bottom-0 z-10 h-1/3 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+                {/* CAST slate */}
+                <span className="absolute end-3 top-3 z-20 bg-ink/75 px-2 py-0.5 font-latin text-[10px] tracking-widest text-gold backdrop-blur">
+                  CAST
+                </span>
+                {/* index badge */}
+                <span className="absolute bottom-3 start-3 z-20 font-latin text-2xl text-ivory/30">
+                  {String(active + 1).padStart(2, "0")}
+                  <span className="text-ivory/15"> / {String(total).padStart(2, "0")}</span>
+                </span>
+              </div>
+            </div>
 
-          {/* Image card (left in RTL) with glow */}
-          <div className="order-1 lg:order-2">
-            <div className="teacher-photo relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-divider bg-surface shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
-              {/* glow behind */}
-              <div
-                className="absolute inset-0 z-0"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 70% 60% at 50% 30%, rgba(225,29,42,0.25), transparent 70%)",
-                }}
-              />
-              <Image
-                src={t.image}
-                alt={`${t.name} — ${t.role}`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="relative z-10 object-cover object-top"
-                loading="lazy"
-              />
-              {/* corner slate label */}
-              <span className="absolute end-3 top-3 z-20 bg-ink/75 px-2 py-0.5 font-latin text-[10px] tracking-widest text-gold">
-                CAST
-              </span>
+            {/* Text column (right in RTL) */}
+            <div className="order-2 lg:order-1">
+              <div className="font-latin text-xs tracking-[0.3em] text-gold">
+                {t.role}
+              </div>
+              <h3 className="mt-2 font-display text-4xl font-extrabold leading-tight text-ivory sm:text-5xl lg:text-6xl">
+                {t.name}
+              </h3>
+              <div className="mt-4 h-px w-16 bg-gold/60" aria-hidden="true" />
+              <p className="mt-5 max-w-xl text-sm leading-[1.9] text-khaki sm:text-base">
+                {t.bio}
+              </p>
+
+              {/* hint for swipe on mobile */}
+              <div className="mt-6 flex items-center gap-2 text-xs text-muted lg:hidden">
+                <span className="inline-flex items-center gap-1">
+                  <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  <ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />
+                </span>
+                <span>برای دیدن استاد بعدی، بکشید</span>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Navigation: prev arrow + dots + next arrow */}
-        <div className="mt-10 flex items-center justify-center gap-4">
+        <div className="mt-12 flex items-center justify-center gap-5">
           <button
             type="button"
             onClick={prev}
             aria-label="استاد قبلی"
-            className="grid h-11 w-11 place-items-center rounded-full border border-divider bg-surface text-ivory transition-colors hover:border-gold hover:text-gold"
+            className="grid h-12 w-12 place-items-center rounded-full border border-divider bg-surface text-ivory transition-all hover:border-gold hover:bg-surface-hover hover:text-gold"
           >
             <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </button>
 
           {/* dots */}
-          <div className="flex items-center gap-2" role="tablist" aria-label="انتخاب استاد">
+          <div className="flex items-center gap-2.5" role="tablist" aria-label="انتخاب استاد">
             {TEACHERS.map((teacher, i) => (
               <button
                 key={teacher.name}
@@ -158,10 +200,10 @@ export function Teachers() {
                 aria-selected={i === active}
                 aria-label={`استاد ${i + 1}: ${teacher.name}`}
                 onClick={() => go(i)}
-                className={`h-2 rounded-full transition-all ${
+                className={`h-2.5 rounded-full transition-all duration-300 ${
                   i === active
-                    ? "w-8 bg-gold"
-                    : "w-2 bg-divider hover:bg-muted"
+                    ? "w-10 bg-gold"
+                    : "w-2.5 bg-divider hover:bg-muted"
                 }`}
               />
             ))}
@@ -171,7 +213,7 @@ export function Teachers() {
             type="button"
             onClick={next}
             aria-label="استاد بعدی"
-            className="grid h-11 w-11 place-items-center rounded-full border border-divider bg-surface text-ivory transition-colors hover:border-gold hover:text-gold"
+            className="grid h-12 w-12 place-items-center rounded-full border border-divider bg-surface text-ivory transition-all hover:border-gold hover:bg-surface-hover hover:text-gold"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
           </button>
