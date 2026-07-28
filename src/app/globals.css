@@ -9,18 +9,22 @@
    ============================================================ */
 
 @theme {
-  /* Brand color palette — stepped dark grays + white + red accent.
-     Each depth level is one perceptible step lighter than the previous. */
+  /* Brand color palette — stepped dark grays + white + red + amber.
+     Red (cinema) + Amber (premium) = red-carpet / film-awards palette.
+     Amber is the shared accent language across ALL departments (not just cinema). */
   --color-noir: #0b0b0c;              /* bg-base (page) */
   --color-noir-2: #121214;            /* bg-elevated (alternating sections) */
   --color-surface: #1a1a1d;           /* cards */
   --color-surface-hover: #232326;     /* card hover */
-  --color-surface-secondary: #161618; /* minor-department cards (slightly muted) */
+  --color-surface-secondary: #161618; /* minor cards (slightly muted) */
   --color-ivory: #f5f5f4;             /* text-primary (not pure white) */
   --color-khaki: #a1a1a6;             /* text-secondary */
   --color-muted: #6b6b70;             /* text-muted */
-  --color-gold: #e11d2a;              /* accent-red (brand red) */
+  --color-gold: #e11d2a;              /* accent-red (brand red — cinema energy) */
   --color-gold-hover: #ff2e40;        /* accent-red hover */
+  --color-amber: #f5b942;             /* PREMIUM amber/gold — shared accent across all departments */
+  --color-amber-hover: #ffd166;       /* amber hover */
+  --color-amber-dim: #b8862a;         /* amber dim (for borders/low-emphasis) */
   --color-crimson: #7f1d1d;           /* dark red (tags / second accent) */
   --color-cine-green: #1f2937;        /* neutral slate (copy-success state) */
   --color-divider: #2a2a2e;           /* border-subtle */
@@ -30,6 +34,7 @@
   --font-display: "Estedad", "Yekan Bakh", system-ui, sans-serif;
   --font-body: "Vazirmatn", system-ui, sans-serif;
   --font-latin: "Bebas Neue", "Impact", sans-serif;
+  --font-mono: "Vazirmatn", ui-monospace, monospace;
 }
 
 /* shadcn semantic tokens → mapped onto the stepped dark theme */
@@ -467,6 +472,43 @@ button:focus-visible {
   background: var(--color-divider);
   border: none;
   border-radius: 0;
+}
+
+/* ---- Glassmorphism (mild backdrop-blur + glow border) ---- */
+.glass {
+  background: rgba(26, 26, 29, 0.55);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(245, 185, 66, 0.14);
+}
+.glass-hover {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.glass-hover:hover {
+  border-color: rgba(245, 185, 66, 0.4);
+  box-shadow: 0 18px 50px -20px rgba(245, 185, 66, 0.25), 0 0 0 1px rgba(245, 185, 66, 0.08);
+}
+
+/* ---- Tilt card (desktop-only subtle 3D hover via JS-set CSS vars) ---- */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+.tilt-card .tilt-inner {
+  transform: translateZ(40px);
+}
+
+/* ---- Amber premium glow (shared accent) ---- */
+.amber-glow {
+  box-shadow: 0 0 40px -8px rgba(245, 185, 66, 0.35);
+}
+.amber-text-glow {
+  text-shadow: 0 0 24px rgba(245, 185, 66, 0.4);
+}
+
+/* ---- Count-up numbers (no animation by default; JS handles) ---- */
+.countup {
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
 /* ---- Tab panel switch animation ---- */

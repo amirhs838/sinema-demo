@@ -12,6 +12,7 @@ import "@fontsource/estedad/800.css";
 import "@fontsource/bebas-neue/400.css";
 
 import { Toaster } from "@/components/ui/toaster";
+import { SmoothScroll } from "@/components/filmnama/smooth-scroll";
 
 // Explicit mobile viewport — ensures proper scaling & safe-area handling on phones
 export const viewport: Viewport = {
@@ -56,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body className="antialiased bg-noir text-ivory font-body">
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
         <Toaster />
       </body>
     </html>
